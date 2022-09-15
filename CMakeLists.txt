@@ -6,7 +6,7 @@ cmake_minimum_required (VERSION 3.8)
 project ("physics_engine")
 
 # Ajoutez une source à l'exécutable de ce projet.
-add_executable (physics_engine "physics_engine.cpp" "physics_engine.h"  "include/cyclone/core.h" "include/cyclone/precision.h")
+add_executable (physics_engine "physics_engine.cpp" "physics_engine.h"  "cyclone/core.h" "cyclone/precision.h")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET physics_engine PROPERTY CXX_STANDARD 20)
