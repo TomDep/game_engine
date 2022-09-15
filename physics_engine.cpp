@@ -11,8 +11,14 @@ using namespace std;
 int main()
 {
 	Vector3 v(2,3,1);
+
 	v.invert();
-	v.print();
-	//cout << v << endl;
+	cout << v << endl;
+
+	v *= 2;
+	cout << v << endl;
+
+	Vector3 z = v * -4;
+	cout << z << endl;
 	return 0;
 }
