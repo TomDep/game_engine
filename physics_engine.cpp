@@ -4,21 +4,24 @@
 #include "physics_engine.h"
 #include "cyclone/core.h"
 #include <iostream>
+#include "cyclone/particle.h"
 
 using namespace cyclone;
 using namespace std;
 
 int main()
 {
-	Vector3 v(2,3,1);
+	Vector3 p(1,2,3);
+	Vector3 v(1, -1, 2);
 
-	v.invert();
-	cout << v << endl;
+	// Particle
+	Particle u(p, v);
+	cout << "nous sommes la : " << u.getPosition() << endl;
 
-	v *= 2;
-	cout << v << endl;
+	u.setAcceleration(Vector3(0, 1, -1));
 
-	Vector3 z = v * -4;
-	cout << z << endl;
+	u.update(10);
+
+	cout << "donnees de la particule : " << u.getPosition() << endl;
 	return 0;
 }
