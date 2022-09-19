@@ -117,5 +117,7 @@ namespace cyclone {
 			friend std::ostream& operator<<(std::ostream& os, const Vector3& vector) {
 				return os << "Vector3 : x=" << vector.x << "\t\ty=" << vector.y << "\t\tz=" << vector.z << std::endl;
 			}
-	};	
+	};
+
+
 }

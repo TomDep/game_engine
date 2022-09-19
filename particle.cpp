@@ -6,7 +6,8 @@
 using namespace cyclone;
 
 void Particle::integrate(real duration) {
-	if (inverseMass <= 0.0f) return;
+	//Can not integrate object with infinite mass
+	if (inverseMass <= 0.0f) return; 
 
 	assert(duration > 0.0);
 

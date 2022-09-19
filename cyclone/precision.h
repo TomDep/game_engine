@@ -7,6 +7,8 @@ namespace cyclone {
 	*/
 	typedef float real;
 
-	//define the precision of the power operator
+	/*
+	Define the precision of the power operator
+	*/
 	#define real_pow powf
 }
