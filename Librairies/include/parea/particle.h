@@ -1,14 +1,9 @@
 #pragma once
 
-#include <iostream>
-#include <string>
-#include <vector>
-#include <math.h>
 #include "precision.h"
 #include "core.h"
-//#include <SFML/Graphics.hpp>
 
-namespace cyclone {
+namespace parea {
 	class Particle {
 	protected:
 		Vector3 Position;

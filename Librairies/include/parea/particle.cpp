@@ -1,9 +1,9 @@
 #pragma once
 
 #include <assert.h>
-#include "cyclone/particle.h"
+#include "particle.h"
 
-using namespace cyclone;
+using namespace parea;
 
 void Particle::integrate(real duration) {
 	//Can not integrate object with infinite mass

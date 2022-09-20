@@ -1,7 +1,6 @@
 #pragma once
 
-
-namespace cyclone {
+namespace parea {
 	/*
 	Define the real number precision
 	*/

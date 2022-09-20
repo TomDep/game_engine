@@ -1,8 +1,9 @@
 #pragma once
 #include "precision.h"
 #include "math.h"
+#include <ostream>
 
-namespace cyclone {
+namespace parea {
 	class Vector3 {
 		public:
 			real x;
@@ -114,10 +115,8 @@ namespace cyclone {
 				std::cout << "Vector3 : x=" << x << "\t\ty=" << y << "\t\tz=" << z << std::endl;
 			}*/
 
-			friend std::ostream& operator<<(std::ostream& os, const Vector3& vector) {
-				return os << "Vector3 : x=" << vector.x << "\t\ty=" << vector.y << "\t\tz=" << vector.z << std::endl;
+			friend std::ostream& operator << (std::ostream& os, const Vector3& vector) {
+				return os << "Vector3 : x=" << vector.x << "\t\ty=" << vector.y << "\t\tz=" << vector.z;
 			}
 	};
-
-
 }
