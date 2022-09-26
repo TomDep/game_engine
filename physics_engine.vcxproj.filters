@@ -31,12 +31,24 @@
     <Filter Include="Fichiers sources\parea">
       <UniqueIdentifier>{044b1afa-c440-463d-8057-b6954fe87f04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers de ressources\shaders">
+      <UniqueIdentifier>{c353d5a9-2b8f-4cc1-a559-7aa2fccabeed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\glm">
+      <UniqueIdentifier>{75e3cbc7-2416-4964-a4eb-fd658d05f33e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\glm\gtc">
+      <UniqueIdentifier>{ffc97e80-e354-4159-8cb3-8720445a8b64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\parea\resources">
+      <UniqueIdentifier>{9e55982d-1d40-412e-aba2-093dac7e445d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\parea\resources">
+      <UniqueIdentifier>{71de7171-eb9f-4d51-ab02-4624d6ffa641}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="glad.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Librairies\include\imgui\imgui.cpp">
@@ -60,8 +72,11 @@
     <ClCompile Include="Librairies\include\imgui\imgui_widgets.cpp">
       <Filter>Fichiers sources\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="Librairies\include\parea\particle.cpp">
+    <ClCompile Include="Librairies\resources\parea\particle.cpp">
       <Filter>Fichiers sources\parea</Filter>
+    </ClCompile>
+    <ClCompile Include="Librairies\resources\shaders\shader.cpp">
+      <Filter>Fichiers sources\parea\resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -98,14 +113,34 @@
     <ClInclude Include="Librairies\include\GLFW\glfw3.h">
       <Filter>Fichiers d%27en-tête\GLFW</Filter>
     </ClInclude>
-    <ClInclude Include="Librairies\include\parea\precision.h">
+    <ClInclude Include="Librairies\include\glm\glm.hpp">
+      <Filter>Fichiers d%27en-tête\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\include\glm\gtc\matrix_transform.hpp">
+      <Filter>Fichiers d%27en-tête\glm\gtc</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\include\glm\gtc\type_ptr.hpp">
+      <Filter>Fichiers d%27en-tête\glm\gtc</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\resources\parea\core.h">
       <Filter>Fichiers d%27en-tête\parea</Filter>
     </ClInclude>
-    <ClInclude Include="Librairies\include\parea\core.h">
+    <ClInclude Include="Librairies\resources\parea\particle.h">
       <Filter>Fichiers d%27en-tête\parea</Filter>
     </ClInclude>
-    <ClInclude Include="Librairies\include\parea\particle.h">
+    <ClInclude Include="Librairies\resources\parea\precision.h">
       <Filter>Fichiers d%27en-tête\parea</Filter>
     </ClInclude>
+    <ClInclude Include="Librairies\resources\shaders\shader.h">
+      <Filter>Fichiers d%27en-tête\parea\resources</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Librairies\resources\shaders\default.frag">
+      <Filter>Fichiers de ressources\shaders</Filter>
+    </None>
+    <None Include="Librairies\resources\shaders\default.vert">
+      <Filter>Fichiers de ressources\shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

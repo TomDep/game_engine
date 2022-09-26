@@ -104,13 +104,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)/Librairies/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/Librairies/include;$(SolutionDir)/Librairies/resources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)/Librairies/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -130,7 +130,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="glad.c" />
     <ClCompile Include="Librairies\include\imgui\imgui.cpp" />
     <ClCompile Include="Librairies\include\imgui\imgui_demo.cpp" />
     <ClCompile Include="Librairies\include\imgui\imgui_draw.cpp" />
@@ -138,12 +137,16 @@
     <ClCompile Include="Librairies\include\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="Librairies\include\imgui\imgui_tables.cpp" />
     <ClCompile Include="Librairies\include\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="Librairies\include\parea\particle.cpp" />
+    <ClCompile Include="Librairies\resources\parea\particle.cpp" />
+    <ClCompile Include="Librairies\resources\shaders\shader.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Librairies\include\glad\glad.h" />
     <ClInclude Include="Librairies\include\GLFW\glfw3.h" />
+    <ClInclude Include="Librairies\include\glm\glm.hpp" />
+    <ClInclude Include="Librairies\include\glm\gtc\matrix_transform.hpp" />
+    <ClInclude Include="Librairies\include\glm\gtc\type_ptr.hpp" />
     <ClInclude Include="Librairies\include\imgui\imconfig.h" />
     <ClInclude Include="Librairies\include\imgui\imgui.h" />
     <ClInclude Include="Librairies\include\imgui\imgui_impl_glfw.h" />
@@ -153,9 +156,14 @@
     <ClInclude Include="Librairies\include\imgui\imstb_rectpack.h" />
     <ClInclude Include="Librairies\include\imgui\imstb_textedit.h" />
     <ClInclude Include="Librairies\include\imgui\imstb_truetype.h" />
-    <ClInclude Include="Librairies\include\parea\core.h" />
-    <ClInclude Include="Librairies\include\parea\particle.h" />
-    <ClInclude Include="Librairies\include\parea\precision.h" />
+    <ClInclude Include="Librairies\resources\parea\core.h" />
+    <ClInclude Include="Librairies\resources\parea\particle.h" />
+    <ClInclude Include="Librairies\resources\parea\precision.h" />
+    <ClInclude Include="Librairies\resources\shaders\shader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Librairies\resources\shaders\default.frag" />
+    <None Include="Librairies\resources\shaders\default.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
