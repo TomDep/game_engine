@@ -21,25 +21,6 @@ class MainApp {
 	const uint32_t WINDOW_HEIGHT = 600;
 	const int GL_VERSION_MAJOR = 3, GL_VERSION_MINOR = 3;
 
-	// Setting an error callback
-	static void error_callback(int error, const char* description) {
-		spdlog::error("Error : {}", description);
-	}
-
-	// Receiving input events
-	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
-	{
-		spdlog::info("{} which is {}", key, (char)key);
-		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-			glfwSetWindowShouldClose(window, GLFW_TRUE);
-	}
-
-	static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
-	{
-		glfwGetCursorPos(window, &xpos, &ypos);
-		spdlog::debug("Mouse position : (x={}, y={})", xpos, ypos);
-	}
-
 public:
 
 	void run() {
@@ -73,16 +54,6 @@ private:
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_RESIZABLE, false);
 
-		// Setting an error callback
-		//glfwSetErrorCallback(error_callback);
-
-		// Set the required callback functions
-		//glfwSetKeyCallback(window, key_callback);
-
-		// Set the position callback funtions to show mouse position
-		// glfwSetCursorPosCallback(window, cursor_position_callback);
-
-		// Making the OpenGL context current
 		glfwMakeContextCurrent(window);
 	}
 
