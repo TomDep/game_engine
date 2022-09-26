@@ -104,12 +104,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)/Librairies/include;$(SolutionDir)/Librairies/resources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\dev\C++\glfw-3.3.8.bin.WIN64\include;C:\dev\C++\spdlog-1.x\include;C:\dev\C++\imgui-master;C:\dev\C++\glew-2.1.0\include;$(SolutionDir)src;$(SolutionDir)res;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)/Librairies/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\dev\C++\glew-2.1.0\lib;C:\dev\C++\glfw-3.3.8.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -130,40 +131,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Librairies\include\imgui\imgui.cpp" />
-    <ClCompile Include="Librairies\include\imgui\imgui_demo.cpp" />
-    <ClCompile Include="Librairies\include\imgui\imgui_draw.cpp" />
-    <ClCompile Include="Librairies\include\imgui\imgui_impl_glfw.cpp" />
-    <ClCompile Include="Librairies\include\imgui\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="Librairies\include\imgui\imgui_tables.cpp" />
-    <ClCompile Include="Librairies\include\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="Librairies\resources\parea\particle.cpp" />
-    <ClCompile Include="Librairies\resources\shaders\shader.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\PhysicsManager.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\parea\particle.cpp" />
+    <ClCompile Include="src\shaders\shader.cpp" />
+    <ClCompile Include="src\UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Librairies\include\glad\glad.h" />
-    <ClInclude Include="Librairies\include\GLFW\glfw3.h" />
-    <ClInclude Include="Librairies\include\glm\glm.hpp" />
-    <ClInclude Include="Librairies\include\glm\gtc\matrix_transform.hpp" />
-    <ClInclude Include="Librairies\include\glm\gtc\type_ptr.hpp" />
-    <ClInclude Include="Librairies\include\imgui\imconfig.h" />
-    <ClInclude Include="Librairies\include\imgui\imgui.h" />
-    <ClInclude Include="Librairies\include\imgui\imgui_impl_glfw.h" />
-    <ClInclude Include="Librairies\include\imgui\imgui_impl_opengl3.h" />
-    <ClInclude Include="Librairies\include\imgui\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="Librairies\include\imgui\imgui_internal.h" />
-    <ClInclude Include="Librairies\include\imgui\imstb_rectpack.h" />
-    <ClInclude Include="Librairies\include\imgui\imstb_textedit.h" />
-    <ClInclude Include="Librairies\include\imgui\imstb_truetype.h" />
-    <ClInclude Include="Librairies\resources\parea\core.h" />
-    <ClInclude Include="Librairies\resources\parea\particle.h" />
-    <ClInclude Include="Librairies\resources\parea\precision.h" />
-    <ClInclude Include="Librairies\resources\shaders\shader.h" />
+    <ClInclude Include="src\PhysicsManager.h" />
+    <ClInclude Include="src\parea\core.h" />
+    <ClInclude Include="src\parea\particle.h" />
+    <ClInclude Include="src\parea\precision.h" />
+    <ClInclude Include="src\shaders\shader.h" />
+    <ClInclude Include="src\UIManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="imgui.ini" />
     <None Include="Librairies\resources\shaders\default.frag" />
     <None Include="Librairies\resources\shaders\default.vert" />
+    <None Include="LICENSE" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
