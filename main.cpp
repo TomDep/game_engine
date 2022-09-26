@@ -24,9 +24,7 @@ class MainApp {
 public:
 
 	void run() {
-		spdlog::set_level(spdlog::level::debug); // Set global log level to debug
-		spdlog::set_pattern("[%^%l%$] %v");
-
+		initLogger();
 		initGLFW();
 		initGLEW();
 		initOpenGL();
@@ -44,6 +42,11 @@ private:
 	UIManager* uiManager;
 
 	/* ---------- METHODS ---------- */
+	void initLogger() {
+		spdlog::set_level(spdlog::level::debug); // Set global log level to debug
+		spdlog::set_pattern("[%^%l%$] %v");
+	}
+
 	void initGLFW() {
 		glfwInit();
 		window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "OpenGL Game Engine", nullptr, nullptr);
