@@ -3,5 +3,5 @@ Debug
 x64
 
 # Visual Studio
+*.filters
 *.vcxproj
-*.vcxproj.filters

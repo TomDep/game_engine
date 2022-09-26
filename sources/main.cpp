@@ -4,8 +4,9 @@
 #include <stdlib.h>						// Conversion, random and dynamic memory management
 #include <stdio.h>						// I/O operations
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+
+#include <glad/glad.h>					
+#include <GLFW/glfw3.h>					// Must be included after glad
 
 using namespace std;
 
@@ -14,6 +15,7 @@ using namespace std;
 
 // Logging
 #include "spdlog/spdlog.h";
+#include <Renderer.h>
 
 class MainApp {
 
@@ -21,13 +23,18 @@ class MainApp {
 	const uint32_t WINDOW_HEIGHT = 600;
 	const int GL_VERSION_MAJOR = 3, GL_VERSION_MINOR = 3;
 
+	static void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+		glViewport(0, 0, width, height);
+	}
+
 public:
 
 	void run() {
 		initLogger();
 		initGLFW();
-		initGLEW();
+		initGLAD();
 		initOpenGL();
+		initRenderer();
 		initUI();
 
 		mainLoop();
@@ -40,6 +47,7 @@ private:
 	/* ---------- VARIABLES ---------- */
 	GLFWwindow* window;
 	UIManager* uiManager;
+	Renderer* renderer;
 
 	/* ---------- METHODS ---------- */
 	void initLogger() {
@@ -55,27 +63,23 @@ private:
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, GL_VERSION_MAJOR);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, GL_VERSION_MINOR);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		glfwWindowHint(GLFW_RESIZABLE, false);
+		glfwWindowHint(GLFW_RESIZABLE, true);
 
 		glfwMakeContextCurrent(window);
 	}
 
-	void initGLEW() {
-		if (glewInit() != GLEW_OK) {
-			spdlog::error("Failed to initialize GLEW");
+	void initGLAD() {
+		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+		{
+			throw std::runtime_error("Failed to initialize GLAD");
 		}
 	}
 
 	void initOpenGL() {
-		
-		// Specify the viewport of OpenGL in the Window
 		glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+		glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-		// Projection matrix defines the properties of the camera that views the objects in the world coordinate frame. 
-		// Here you typically set the zoom factor, aspect ratio and the near and far clipping planes
-		glMatrixMode(GL_PROJECTION); 
-
-		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
+		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	}
 
 	void initUI() {
@@ -83,22 +87,34 @@ private:
 		uiManager->init(window);
 	}
 
+	void initRenderer() {
+		renderer = new Renderer();
+	}
+
 	void mainLoop() {
 		while (!glfwWindowShouldClose(window))
 		{
 			// Events
-			glfwPollEvents();
+			processInput();
 
 			// Updates
 
 			// Render
 			glClear(GL_COLOR_BUFFER_BIT);
 
+			renderer->render();
 			uiManager->render();
 
 			// Swap the back buffer with the front buffer
 			glfwSwapBuffers(window);
+			glfwPollEvents();
 		}
+	}
+
+	void processInput()
+	{
+		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+			glfwSetWindowShouldClose(window, true);
 	}
 
 	void cleanUp() {
