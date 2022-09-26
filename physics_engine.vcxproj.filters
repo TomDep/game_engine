@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Fichiers sources\imgui">
-      <UniqueIdentifier>{85e93666-a2f1-4a5f-84f1-627242582e53}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers d%27en-tête\imgui">
       <UniqueIdentifier>{3b1d0255-8e8b-49f6-9726-59ec7a04adef}</UniqueIdentifier>
     </Filter>
@@ -28,9 +25,6 @@
     <Filter Include="Fichiers d%27en-tête\parea">
       <UniqueIdentifier>{34a434ee-207d-4957-93cd-d53cc32bdad2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers sources\parea">
-      <UniqueIdentifier>{044b1afa-c440-463d-8057-b6954fe87f04}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers de ressources\shaders">
       <UniqueIdentifier>{c353d5a9-2b8f-4cc1-a559-7aa2fccabeed}</UniqueIdentifier>
     </Filter>
@@ -40,44 +34,9 @@
     <Filter Include="Fichiers d%27en-tête\glm\gtc">
       <UniqueIdentifier>{ffc97e80-e354-4159-8cb3-8720445a8b64}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers sources\parea\resources">
-      <UniqueIdentifier>{9e55982d-1d40-412e-aba2-093dac7e445d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers d%27en-tête\parea\resources">
       <UniqueIdentifier>{71de7171-eb9f-4d51-ab02-4624d6ffa641}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Librairies\include\imgui\imgui.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Librairies\include\imgui\imgui_demo.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Librairies\include\imgui\imgui_draw.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Librairies\include\imgui\imgui_impl_glfw.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Librairies\include\imgui\imgui_impl_opengl3.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Librairies\include\imgui\imgui_tables.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Librairies\include\imgui\imgui_widgets.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Librairies\resources\parea\particle.cpp">
-      <Filter>Fichiers sources\parea</Filter>
-    </ClCompile>
-    <ClCompile Include="Librairies\resources\shaders\shader.cpp">
-      <Filter>Fichiers sources\parea\resources</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Librairies\include\imgui\imgui_internal.h">
@@ -134,6 +93,66 @@
     <ClInclude Include="Librairies\resources\shaders\shader.h">
       <Filter>Fichiers d%27en-tête\parea\resources</Filter>
     </ClInclude>
+    <ClInclude Include="src\UIManager.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\glad\includes\glad\glad.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\glad\includes\KHR\khrplatform.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\parea\core.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\parea\particle.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\parea\precision.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shaders\shader.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IconsFontAwesome.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PhysicsManager.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\imgui\imgui.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\imgui\imconfig.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\imgui\imgui_internal.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\imgui\imstb_rectpack.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\imgui\imstb_textedit.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\imgui\imstb_truetype.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\imgui\backends\imgui_impl_opengl3.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\imgui\backends\imgui_impl_opengl3_loader.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dev\Libraries\imgui\imgui\backends\imgui_impl_glfw.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\imgui\backends\imgui_impl_glfw.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Librairies\resources\shaders\default.frag">
@@ -142,5 +161,52 @@
     <None Include="Librairies\resources\shaders\default.vert">
       <Filter>Fichiers de ressources\shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\parea\particle.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shaders\shader.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\glad\src\glad.c">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PhysicsManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\imgui\imgui.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\imgui\imgui_demo.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\imgui\imgui_draw.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\imgui\imgui_tables.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\imgui\imgui_widgets.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\imgui\backends\imgui_impl_opengl3.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dev\Libraries\imgui\imgui\backends\imgui_impl_glfw.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\imgui\backends\imgui_impl_glfw.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

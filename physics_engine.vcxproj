@@ -76,10 +76,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\dev\Libraries\glfw\bin\glfw-3.3.8.bin.WIN64\include;C:\dev\Libraries\glew\bin\glew-2.1.0\include;C:\dev\Libraries\imgui\imgui;C:\dev\Libraries\spdlog\include;C:\Users\Tom\Documents\physics_engine\res;C:\Users\Tom\Documents\physics_engine\lib\glad\includes</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\dev\Libraries\glfw\bin\glfw-3.3.8.bin.WIN64\lib-vc2022;C:\dev\Libraries\glew\bin\glew-2.1.0\lib\Release\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;glu32.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -90,12 +93,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\dev\Libraries\glfw\bin\glfw-3.3.8.bin.WIN64\include;C:\dev\Libraries\glew\bin\glew-2.1.0\include;C:\dev\Libraries\imgui\imgui;C:\dev\Libraries\spdlog\include;C:\Users\Tom\Documents\physics_engine\res;C:\Users\Tom\Documents\physics_engine\lib\glad\includes</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\dev\Libraries\glfw\bin\glfw-3.3.8.bin.WIN64\lib-vc2022;C:\dev\Libraries\glew\bin\glew-2.1.0\lib\Release\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;glu32.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -104,13 +110,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)/Librairies/include;$(SolutionDir)/Librairies/resources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\dev\Libraries\glfw\bin\glfw-3.3.8.bin.WIN64\include;C:\dev\Libraries\glew\bin\glew-2.1.0\include;C:\dev\Libraries\imgui\imgui;C:\dev\Libraries\spdlog\include;C:\Users\Tom\Documents\physics_engine\res;C:\Users\Tom\Documents\physics_engine\lib\glad\includes</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)/Librairies/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\dev\Libraries\glfw\bin\glfw-3.3.8.bin.WIN64\lib-vc2022;C:\dev\Libraries\glew\bin\glew-2.1.0\lib\Release\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;glu32.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -121,27 +127,37 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\dev\Libraries\glfw\bin\glfw-3.3.8.bin.WIN64\include;C:\dev\Libraries\glew\bin\glew-2.1.0\include;C:\dev\Libraries\imgui\imgui;C:\dev\Libraries\spdlog\include;C:\Users\Tom\Documents\physics_engine\res;C:\Users\Tom\Documents\physics_engine\lib\glad\includes</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\dev\Libraries\glfw\bin\glfw-3.3.8.bin.WIN64\lib-vc2022;C:\dev\Libraries\glew\bin\glew-2.1.0\lib\Release\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;glu32.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Librairies\include\imgui\imgui.cpp" />
-    <ClCompile Include="Librairies\include\imgui\imgui_demo.cpp" />
-    <ClCompile Include="Librairies\include\imgui\imgui_draw.cpp" />
-    <ClCompile Include="Librairies\include\imgui\imgui_impl_glfw.cpp" />
-    <ClCompile Include="Librairies\include\imgui\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="Librairies\include\imgui\imgui_tables.cpp" />
-    <ClCompile Include="Librairies\include\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="Librairies\resources\parea\particle.cpp" />
-    <ClCompile Include="Librairies\resources\shaders\shader.cpp" />
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="..\..\..\..\dev\Libraries\imgui\imgui\backends\imgui_impl_glfw.h" />
+    <ClInclude Include="lib\glad\includes\glad\glad.h" />
+    <ClInclude Include="lib\imgui\backends\imgui_impl_glfw.h" />
+    <ClInclude Include="lib\imgui\backends\imgui_impl_opengl3.h" />
+    <ClInclude Include="lib\imgui\backends\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="lib\imgui\imconfig.h" />
+    <ClInclude Include="lib\imgui\imgui.h" />
+    <ClInclude Include="lib\imgui\imgui_internal.h" />
+    <ClInclude Include="lib\imgui\imstb_rectpack.h" />
+    <ClInclude Include="lib\imgui\imstb_textedit.h" />
+    <ClInclude Include="lib\imgui\imstb_truetype.h" />
+    <ClInclude Include="src\IconsFontAwesome.h" />
+    <ClInclude Include="lib\glad\includes\KHR\khrplatform.h" />
+    <ClInclude Include="src\parea\core.h" />
+    <ClInclude Include="src\parea\particle.h" />
+    <ClInclude Include="src\parea\precision.h" />
+    <ClInclude Include="src\PhysicsManager.h" />
+    <ClInclude Include="src\shaders\shader.h" />
+    <ClInclude Include="src\UIManager.h" />
     <ClInclude Include="Librairies\include\glad\glad.h" />
     <ClInclude Include="Librairies\include\GLFW\glfw3.h" />
     <ClInclude Include="Librairies\include\glm\glm.hpp" />
@@ -160,10 +176,28 @@
     <ClInclude Include="Librairies\resources\parea\particle.h" />
     <ClInclude Include="Librairies\resources\parea\precision.h" />
     <ClInclude Include="Librairies\resources\shaders\shader.h" />
+    <ClInclude Include="src\Renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Librairies\resources\shaders\default.frag" />
     <None Include="Librairies\resources\shaders\default.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\dev\Libraries\imgui\imgui\backends\imgui_impl_glfw.cpp" />
+    <ClCompile Include="lib\glad\src\glad.c" />
+    <ClCompile Include="lib\imgui\backends\imgui_impl_glfw.cpp" />
+    <ClCompile Include="lib\imgui\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="lib\imgui\imgui.cpp" />
+    <ClCompile Include="lib\imgui\imgui_demo.cpp" />
+    <ClCompile Include="lib\imgui\imgui_draw.cpp" />
+    <ClCompile Include="lib\imgui\imgui_tables.cpp" />
+    <ClCompile Include="lib\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\parea\particle.cpp" />
+    <ClCompile Include="src\PhysicsManager.cpp" />
+    <ClCompile Include="src\Renderer.cpp" />
+    <ClCompile Include="src\shaders\shader.cpp" />
+    <ClCompile Include="src\UIManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
