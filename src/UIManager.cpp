@@ -1,6 +1,6 @@
 #include "UIManager.h"
 
-#include <spdlog/spdlog.h>;
+#include <spdlog/spdlog.h>
 
 // Icons from FontAwesome
 #include "IconsFontAwesome.h"	// From... https://github.com/juliettef/IconFontCppHeaders/

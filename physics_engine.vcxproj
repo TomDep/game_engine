@@ -141,9 +141,6 @@
   <ItemGroup>
     <ClInclude Include="src\graphics\Camera.h" />
     <ClInclude Include="lib\glad\includes\glad\glad.h" />
-    <ClInclude Include="lib\imgui\backends\imgui_impl_glfw.h" />
-    <ClInclude Include="lib\imgui\backends\imgui_impl_opengl3.h" />
-    <ClInclude Include="lib\imgui\backends\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="src\graphics\stb_image.h" />
     <ClInclude Include="src\IconsFontAwesome.h" />
     <ClInclude Include="lib\glad\includes\KHR\khrplatform.h" />
@@ -162,24 +159,6 @@
     <ClInclude Include="src\PhysicsManager.h" />
     <ClInclude Include="src\graphics\Shader.h" />
     <ClInclude Include="src\UIManager.h" />
-    <ClInclude Include="Librairies\include\glad\glad.h" />
-    <ClInclude Include="Librairies\include\GLFW\glfw3.h" />
-    <ClInclude Include="Librairies\include\glm\glm.hpp" />
-    <ClInclude Include="Librairies\include\glm\gtc\matrix_transform.hpp" />
-    <ClInclude Include="Librairies\include\glm\gtc\type_ptr.hpp" />
-    <ClInclude Include="Librairies\include\imgui\imconfig.h" />
-    <ClInclude Include="Librairies\include\imgui\imgui.h" />
-    <ClInclude Include="Librairies\include\imgui\imgui_impl_glfw.h" />
-    <ClInclude Include="Librairies\include\imgui\imgui_impl_opengl3.h" />
-    <ClInclude Include="Librairies\include\imgui\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="Librairies\include\imgui\imgui_internal.h" />
-    <ClInclude Include="Librairies\include\imgui\imstb_rectpack.h" />
-    <ClInclude Include="Librairies\include\imgui\imstb_textedit.h" />
-    <ClInclude Include="Librairies\include\imgui\imstb_truetype.h" />
-    <ClInclude Include="Librairies\resources\parea\core.h" />
-    <ClInclude Include="Librairies\resources\parea\particle.h" />
-    <ClInclude Include="Librairies\resources\parea\precision.h" />
-    <ClInclude Include="Librairies\resources\shaders\shader.h" />
     <ClInclude Include="src\graphics\Renderer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -191,8 +170,6 @@
     <ClCompile Include="lib\imgui\backends\imgui_impl_glfw.cpp" />
     <ClCompile Include="lib\imgui\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\graphics\Camera.cpp" />
-    <ClCompile Include="lib\imgui\backends\imgui_impl_glfw.cpp" />
-    <ClCompile Include="lib\imgui\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="lib\imgui\imgui.cpp" />
     <ClCompile Include="lib\imgui\imgui_demo.cpp" />
     <ClCompile Include="lib\imgui\imgui_draw.cpp" />

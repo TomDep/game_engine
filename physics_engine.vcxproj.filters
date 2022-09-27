@@ -39,60 +39,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Librairies\include\imgui\imgui_internal.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Librairies\include\imgui\imstb_rectpack.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Librairies\include\imgui\imstb_textedit.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Librairies\include\imgui\imstb_truetype.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Librairies\include\imgui\imconfig.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Librairies\include\imgui\imgui.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Librairies\include\imgui\imgui_impl_glfw.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Librairies\include\imgui\imgui_impl_opengl3.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Librairies\include\glad\glad.h">
-      <Filter>Fichiers d%27en-tête\glad</Filter>
-    </ClInclude>
-    <ClInclude Include="Librairies\include\imgui\imgui_impl_opengl3_loader.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Librairies\include\GLFW\glfw3.h">
-      <Filter>Fichiers d%27en-tête\GLFW</Filter>
-    </ClInclude>
-    <ClInclude Include="Librairies\include\glm\glm.hpp">
-      <Filter>Fichiers d%27en-tête\glm</Filter>
-    </ClInclude>
-    <ClInclude Include="Librairies\include\glm\gtc\matrix_transform.hpp">
-      <Filter>Fichiers d%27en-tête\glm\gtc</Filter>
-    </ClInclude>
-    <ClInclude Include="Librairies\include\glm\gtc\type_ptr.hpp">
-      <Filter>Fichiers d%27en-tête\glm\gtc</Filter>
-    </ClInclude>
-    <ClInclude Include="Librairies\resources\parea\core.h">
-      <Filter>Fichiers d%27en-tête\parea</Filter>
-    </ClInclude>
-    <ClInclude Include="Librairies\resources\parea\particle.h">
-      <Filter>Fichiers d%27en-tête\parea</Filter>
-    </ClInclude>
-    <ClInclude Include="Librairies\resources\parea\precision.h">
-      <Filter>Fichiers d%27en-tête\parea</Filter>
-    </ClInclude>
-    <ClInclude Include="Librairies\resources\shaders\shader.h">
-      <Filter>Fichiers d%27en-tête\parea\resources</Filter>
-    </ClInclude>
     <ClInclude Include="src\UIManager.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
