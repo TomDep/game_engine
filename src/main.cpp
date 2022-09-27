@@ -73,6 +73,26 @@ public:
 		camera->setPitchAndYaw(pitch, yaw);
 	}
 
+	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+	{
+		if (key == GLFW_KEY_TAB && action == GLFW_PRESS)
+		{
+			MainApp& app = MainApp::getInstance();
+			Camera* cam = app.renderer->getCamera();
+			
+			if (app.uiManager->showWindow == true) {
+				app.uiManager->showWindow = false;	
+				cam->setCanMove(true);
+				glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+			}
+			else{
+				app.uiManager->showWindow = true;
+				cam->setCanMove(false);
+				glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+			}	
+		}
+	}
+
 	const uint32_t WINDOW_WIDTH = 800;
 	const uint32_t WINDOW_HEIGHT = 600;
 	const int GL_VERSION_MAJOR = 3, GL_VERSION_MINOR = 3;
@@ -135,6 +155,7 @@ private:
 		firstMouse = true;
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		glfwSetCursorPosCallback(window, mouse_callback);
+		glfwSetKeyCallback(window, key_callback);
 	}
 
 	void initOpenGL() {
