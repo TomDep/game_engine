@@ -1,10 +1,16 @@
 #pragma once
+
 #include "Shader.h"
+#include "Camera.h"
+
 class Renderer {
 public:
 
-    Renderer();
+    Renderer(Camera* camera);
 	void render();
+
+    /* ----- Getters & Setters ----- */
+    Camera* getCamera() const { return camera; }
 
 private:
 
@@ -74,5 +80,6 @@ private:
     const double radius = 10.0f;
 
     Shader* shader;
+    Camera* camera;
 };
 

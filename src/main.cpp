@@ -4,6 +4,9 @@
 #include <stdlib.h>						// Conversion, random and dynamic memory management
 #include <stdio.h>						// I/O operations
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 #include "glad/glad.h"					
 #include <GLFW/glfw3.h>					// Must be included after glad
 
@@ -14,7 +17,9 @@ using namespace std;
 
 // Logging
 #include "spdlog/spdlog.h"
+
 #include "graphics/Renderer.h"
+#include "graphics/Camera.h"
 
 class MainApp {
 
@@ -48,6 +53,9 @@ private:
 	UIManager* uiManager;
 	Renderer* renderer;
 
+	float deltaTime = 0.0f;	// Time between current frame and last frame
+	float lastFrame = 0.0f; // Time of last frame
+
 	/* ---------- METHODS ---------- */
 	void initLogger() {
 		spdlog::set_level(spdlog::level::debug); // Set global log level to debug
@@ -72,7 +80,9 @@ private:
 		{
 			throw std::runtime_error("Failed to initialize GLAD");
 		}
+	}
 
+	void initOpenGL() {
 		glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 		glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
@@ -86,16 +96,25 @@ private:
 	}
 
 	void initRenderer() {
-		renderer = new Renderer();
+		glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+		glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+		glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+
+		Camera * camera = new Camera(cameraPos, cameraFront, cameraUp);
+		renderer = new Renderer(camera);
 	}
 
 	void mainLoop() {
 		while (!glfwWindowShouldClose(window))
 		{
+			
+			// Updates
+			float currentFrame = glfwGetTime();
+			deltaTime = currentFrame - lastFrame;
+			lastFrame = currentFrame;
+
 			// Events
 			processInput();
-
-			// Updates
 
 			// Render
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -113,6 +132,28 @@ private:
 	{
 		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 			glfwSetWindowShouldClose(window, true);
+
+		// Camera movement
+		Camera* camera = renderer->getCamera();
+
+		glm::vec3 cameraPos = camera->getPosition();
+		float cameraSpeed = camera->getSpeed() * deltaTime;
+
+		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+			cameraPos += cameraSpeed * camera->getFront();
+		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+			cameraPos -= cameraSpeed * camera->getFront();
+		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+			cameraPos -= glm::normalize(glm::cross(camera->getFront(), camera->getUp())) * cameraSpeed;
+		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+			cameraPos += glm::normalize(glm::cross(camera->getFront(), camera->getUp())) * cameraSpeed;
+		if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+			cameraPos += cameraSpeed * camera->getUp();
+		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+			cameraPos -= cameraSpeed * camera->getUp();
+
+		camera->setPosition(cameraPos);
+
 	}
 
 	void cleanUp() {

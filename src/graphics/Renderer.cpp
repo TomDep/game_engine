@@ -13,7 +13,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-Renderer::Renderer() {
+Renderer::Renderer(Camera* camera) : camera(camera) {
 	spdlog::info("Initializing the Renderer ...");
 
 	int nrAttributes;
@@ -108,29 +108,12 @@ Renderer::Renderer() {
 
 
 
-	// Camera !
-	// Camera position 
-	glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
-
-	// Camera direction
-	glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
-	glm::vec3 cameraDirection = glm::normalize(cameraPos - cameraTarget);
-
-	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-	glm::vec3 cameraRight = glm::normalize(glm::cross(up, cameraDirection));
-	glm::vec3 cameraUp = glm::cross(cameraDirection, cameraRight);
-
-	glm::mat4 view;
-	view = glm::lookAt(
-		glm::vec3(0.0f, 0.0f, 3.0f),
-		glm::vec3(0.0f, 0.0f, 0.0f),
-		glm::vec3(0.0f, 1.0f, 0.0f));
-
+	// Camera :
 	glm::mat4 projection;
 	projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 
 	shader->setMatrix4x4("model", model);
-	shader->setMatrix4x4("view", view);
+	shader->setMatrix4x4("view", camera->getView());
 	shader->setMatrix4x4("projection", projection);
 
 	spdlog::info("Done!");
@@ -145,11 +128,7 @@ void Renderer::render() {
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, texture2);
 
-	double camX = sin(glfwGetTime()) * radius;
-	double camZ = cos(glfwGetTime()) * radius;
-	glm::mat4 view;
-	view = glm::lookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
-	shader->setMatrix4x4("view", view);
+	shader->setMatrix4x4("view", camera->getView());
 
 	glBindVertexArray(VAO);
 	for (unsigned int i = 0; i < 10; i++)
