@@ -42,6 +42,13 @@ public:
 		updateDirection();
 	}
 	
+	bool getCanMove() {
+		return canMove;
+	}
+	void setCanMove(bool b) {
+		canMove = b;
+	}
+
 private:
 	glm::vec3 pos, front, up;
 	float yaw = 0.0f, pitch = -90.0f;
@@ -49,13 +56,17 @@ private:
 	float speed = 1.0f;
 	float sensitivity = 0.1f;
 
-	void updateDirection() {
-		glm::vec3 direction;
+	bool canMove = true;
 
-		direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-		direction.y = sin(glm::radians(pitch));
-		direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+	void updateDirection() {
+		if (canMove) {
+			glm::vec3 direction;
+
+			direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+			direction.y = sin(glm::radians(pitch));
+			direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 		
-		front = glm::normalize(direction);
+			front = glm::normalize(direction);
+		}
 	}
 };

@@ -18,7 +18,9 @@ public:
 
 	void init(GLFWwindow* window);
 	void render();
-	void cleanUp();
+	void cleanUp();	
+	
+	bool showWindow = false;
 private:
 
 	int newWeapon = 0;

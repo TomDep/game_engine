@@ -182,6 +182,10 @@
     <ClCompile Include="src\graphics\Shader.cpp" />
     <ClCompile Include="src\ui\UIManager.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="res\fonts\fa-solid-900-free.ttf" />
+    <Font Include="res\fonts\fa-solid-900.ttf" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
