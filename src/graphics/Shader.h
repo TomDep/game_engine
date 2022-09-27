@@ -30,7 +30,9 @@ public:
     void setBool(const std::string& name, bool value) const;
     void setInt(const std::string& name, int value) const;
     void setFloat(const std::string& name, float value) const;
-    void setVector4(const std::string& name, parea::Vector4 value) const;
+    void setVector3(const std::string& name, glm::vec3 vector) const;
+    void setVector3(const std::string& name, float x, float y, float z) const;
+    void setVector4(const std::string& name, glm::vec4 vector) const;
     void setMatrix4x4(const std::string& name, glm::mat4 matrix) const;
 
     ~Shader();

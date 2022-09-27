@@ -72,7 +72,10 @@ private:
     };
 
     unsigned int VBO;
+
     unsigned int VAO;
+    unsigned int lightVAO;
+
     unsigned int EBO;
     unsigned int texture1;
     unsigned int texture2;
@@ -80,6 +83,8 @@ private:
     const double radius = 10.0f;
 
     Shader* shader;
+    Shader* lightShader;
+
     Camera* camera;
 };
 

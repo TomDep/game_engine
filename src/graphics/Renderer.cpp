@@ -99,14 +99,20 @@ Renderer::Renderer(Camera* camera) : camera(camera) {
 	shader->setInt("texture1", 0);
 	shader->setInt("texture2", 1);
 
+	glGenVertexArrays(1, &lightVAO);
+	glBindVertexArray(lightVAO);
+	// we only need to bind to the VBO, the container's VBO's data already contains the data.
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	// set the vertex attribute 
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
 	// Adding perspective
 	glm::mat4 proj = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 100.0f);
 
 	// Transformation
 	glm::mat4 model = glm::mat4(1.0f);
-	model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-
-
+	//model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
 	// Camera :
 	glm::mat4 projection;
@@ -116,31 +122,44 @@ Renderer::Renderer(Camera* camera) : camera(camera) {
 	shader->setMatrix4x4("view", camera->getView());
 	shader->setMatrix4x4("projection", projection);
 
+	// Lighting
+	lightShader = new Shader("res/shaders/lightShader");
+
+	shader->setVector3("objectColor", 1.0f, 0.5f, 0.31f);
+	shader->setVector3("lightColor", 1.0f, 1.0f, 1.0f);
+
+	glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+	model = glm::mat4(1.0f);
+	model = glm::translate(model, lightPos);
+	model = glm::scale(model, glm::vec3(0.2f));
+
+	lightShader->use();
+	lightShader->setMatrix4x4("model", model);
+	lightShader->setMatrix4x4("view", camera->getView());
+	lightShader->setMatrix4x4("projection", projection);
+
 	spdlog::info("Done!");
 }
 
 void Renderer::render() {
 
+	// Draw the light
+	lightShader->use();
+	lightShader->setMatrix4x4("view", camera->getView());
+	glBindVertexArray(lightVAO);
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+
+	// Draw the rest
 	shader->use();
+	shader->setMatrix4x4("view", camera->getView());
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture1);
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, texture2);
 
-	shader->setMatrix4x4("view", camera->getView());
-
 	glBindVertexArray(VAO);
-	for (unsigned int i = 0; i < 10; i++)
-	{
-		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, cubePositions[i]);
-		float angle = 20.0f * i;
-		model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
-		shader->setMatrix4x4("model", model);
-
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-	}
+	glDrawArrays(GL_TRIANGLES, 0, 36);
 	
 	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
