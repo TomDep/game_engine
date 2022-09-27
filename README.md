@@ -21,8 +21,8 @@ Realized by Aksel Vaillant, Clément Le Batard and Juliette Le Meudec
 
 ## Files architecture  
 
-With this project, you don't need to setup everything. Everything is already included.   
-You will find 3 importants folders : lib, res and src.  
+With this project, you don't need to configure everything. Everything is already included.   
+You will find 3 important folders : lib, res and src.  
 - lib contains all our librairies mentionned above.
 - res contains all our additional ressources like images, shaders, fonts and so on.
 - src contains all the physics engine with systems like UI (User Interface), graphics and finally physics.
