@@ -142,7 +142,7 @@
     <ClInclude Include="src\graphics\Camera.h" />
     <ClInclude Include="lib\glad\includes\glad\glad.h" />
     <ClInclude Include="src\graphics\stb_image.h" />
-    <ClInclude Include="src\IconsFontAwesome.h" />
+    <ClInclude Include="src\ui\IconsFontAwesome.h" />
     <ClInclude Include="lib\glad\includes\KHR\khrplatform.h" />
     <ClInclude Include="lib\imgui\imgui.h" />
     <ClInclude Include="lib\imgui\backends\imgui_impl_glfw.h" />
@@ -153,12 +153,12 @@
     <ClInclude Include="lib\imgui\imstb_rectpack.h" />
     <ClInclude Include="lib\imgui\imstb_textedit.h" />
     <ClInclude Include="lib\imgui\imstb_truetype.h" />
-    <ClInclude Include="src\parea\core.h" />
-    <ClInclude Include="src\parea\particle.h" />
-    <ClInclude Include="src\parea\precision.h" />
-    <ClInclude Include="src\PhysicsManager.h" />
+    <ClInclude Include="src\physics\parea\core.h" />
+    <ClInclude Include="src\physics\parea\particle.h" />
+    <ClInclude Include="src\physics\parea\precision.h" />
+    <ClInclude Include="src\physics\PhysicsManager.h" />
     <ClInclude Include="src\graphics\Shader.h" />
-    <ClInclude Include="src\UIManager.h" />
+    <ClInclude Include="src\ui\UIManager.h" />
     <ClInclude Include="src\graphics\Renderer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -176,11 +176,11 @@
     <ClCompile Include="lib\imgui\imgui_tables.cpp" />
     <ClCompile Include="lib\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\parea\particle.cpp" />
-    <ClCompile Include="src\PhysicsManager.cpp" />
+    <ClCompile Include="src\physics\parea\particle.cpp" />
+    <ClCompile Include="src\physics\PhysicsManager.cpp" />
     <ClCompile Include="src\graphics\Renderer.cpp" />
     <ClCompile Include="src\graphics\Shader.cpp" />
-    <ClCompile Include="src\UIManager.cpp" />
+    <ClCompile Include="src\ui\UIManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

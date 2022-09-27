@@ -13,13 +13,14 @@
 using namespace std;
 
 // UI
-#include "UIManager.h"
+#include "ui/UIManager.h"
 
 // Logging
 #include "spdlog/spdlog.h"
 
 #include "graphics/Renderer.h"
 #include "graphics/Camera.h"
+#include "physics/PhysicsManager.h"
 
 class MainApp {
 public:
@@ -87,6 +88,7 @@ public:
 		initGLFW();
 		initOpenGL();
 		initRenderer();
+		initPhysics();
 		initUI();
 
 		mainLoop();
@@ -97,6 +99,7 @@ public:
 	/* ---------- VARIABLES ---------- */
 	GLFWwindow* window;
 	UIManager* uiManager;
+	PhysicsManager* physicsManager;
 	
 	float deltaTime = 0.0f;	// Time between current frame and last frame
 	float lastFrame = 0.0f; // Time of last frame
@@ -160,6 +163,10 @@ private:
 		renderer = new Renderer(camera);
 	}
 
+	void initPhysics() {
+		physicsManager = new PhysicsManager();
+	}
+
 	void mainLoop() {
 		while (!glfwWindowShouldClose(window))
 		{
@@ -168,6 +175,8 @@ private:
 			float currentFrame = glfwGetTime();
 			deltaTime = currentFrame - lastFrame;
 			lastFrame = currentFrame;
+
+			physicsManager->update(deltaTime);
 
 			// Events
 			processInput();
