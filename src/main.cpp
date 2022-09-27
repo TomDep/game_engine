@@ -22,6 +22,55 @@ using namespace std;
 #include "graphics/Camera.h"
 
 class MainApp {
+public:
+
+	static MainApp& getInstance() {
+		static MainApp instance;
+		return instance;
+	}
+
+	/* ---------- Callbacks ---------- */
+	static void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
+		MainApp& app = MainApp::getInstance();
+
+		float xoffset = xpos - app.lastX;
+		float yoffset = app.lastY - ypos; // reversed since y-coordinates range from bottom to top
+		app.lastX = xpos;
+		app.lastY = ypos;
+
+		Camera* camera = app.renderer->getCamera();
+		const float sensitivity = camera->getSensitivity();
+		xoffset *= sensitivity;
+		yoffset *= sensitivity;
+
+		float pitch = camera->getPitch();
+		float yaw = camera->getYaw();
+
+		pitch += yoffset;
+		yaw += xoffset;
+
+		if (pitch > 89.0f)
+			pitch = 89.0f;
+		if (pitch < -89.0f)
+			pitch = -89.0f;
+
+		if (pitch > 179.0f)
+			pitch = 179.0f;
+		if (pitch < -179.0f)
+			pitch = -179.0f;
+
+		if (app.firstMouse) // initially set to true
+		{
+			app.lastX = xpos;
+			app.lastY = ypos;
+			app.firstMouse = false;
+
+			pitch = 0;
+			yaw = -90;
+		}
+
+		camera->setPitchAndYaw(pitch, yaw);
+	}
 
 	const uint32_t WINDOW_WIDTH = 800;
 	const uint32_t WINDOW_HEIGHT = 600;
@@ -36,7 +85,6 @@ public:
 	void run() {
 		initLogger();
 		initGLFW();
-		initGLAD();
 		initOpenGL();
 		initRenderer();
 		initUI();
@@ -46,15 +94,22 @@ public:
 		cleanUp();
 	}
 
-private:
-
 	/* ---------- VARIABLES ---------- */
 	GLFWwindow* window;
 	UIManager* uiManager;
-	Renderer* renderer;
-
+	
 	float deltaTime = 0.0f;	// Time between current frame and last frame
 	float lastFrame = 0.0f; // Time of last frame
+	
+	Renderer* renderer;
+
+	float lastX = WINDOW_WIDTH / 2, lastY = WINDOW_HEIGHT / 2;
+	bool firstMouse;
+
+private:
+	MainApp(void) {}				// private constructor necessary to allow only 1 instance
+	MainApp(MainApp const&);		// prevent copies
+	void operator=(MainApp const&); // prevent assignments
 
 	/* ---------- METHODS ---------- */
 	void initLogger() {
@@ -73,16 +128,17 @@ private:
 		glfwWindowHint(GLFW_RESIZABLE, true);
 
 		glfwMakeContextCurrent(window);
-	}
 
-	void initGLAD() {
-		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-		{
-			throw std::runtime_error("Failed to initialize GLAD");
-		}
+		firstMouse = true;
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		glfwSetCursorPosCallback(window, mouse_callback);
 	}
 
 	void initOpenGL() {
+		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+			throw std::runtime_error("Failed to initialize GLAD");
+		}
+
 		glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 		glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
@@ -166,7 +222,7 @@ private:
 
 int main()
 {
-	MainApp app;
+	MainApp& app = MainApp::getInstance();
 
 	try {
 		app.run();
