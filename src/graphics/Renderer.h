@@ -12,6 +12,9 @@ public:
     /* ----- Getters & Setters ----- */
     Camera* getCamera() const { return camera; }
 
+    float getFov() { return fov; }
+    void setFov(float f) { fov = f; }
+
 private:
 
     float vertices[216] = {
@@ -86,5 +89,6 @@ private:
     Shader* lightShader;
 
     Camera* camera;
+    float fov = 45.0f;
 };
 

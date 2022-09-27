@@ -73,6 +73,20 @@ public:
 		camera->setPitchAndYaw(pitch, yaw);
 	}
 
+	static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+	{
+		MainApp& app = MainApp::getInstance();
+		float fov = app.renderer->getFov();
+		fov -= (float)yoffset;
+
+		if (fov < 1.0f)
+			app.renderer->setFov(1.0f);
+		if (fov > 45.0f)
+			app.renderer->setFov(45.0f);		
+		
+		app.renderer->setFov(fov);
+	}
+
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 	{
 		if (key == GLFW_KEY_TAB && action == GLFW_PRESS)
@@ -156,6 +170,7 @@ private:
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		glfwSetCursorPosCallback(window, mouse_callback);
 		glfwSetKeyCallback(window, key_callback);
+		glfwSetScrollCallback(window, scroll_callback);
 	}
 
 	void initOpenGL() {
