@@ -8,10 +8,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "../parea/core.h";
+#include "../parea/core.h"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h";
+#include "stb_image.h"
 
 Renderer::Renderer() {
 	spdlog::info("Initializing the Renderer ...");
@@ -138,7 +138,6 @@ Renderer::Renderer() {
 
 void Renderer::render() {
 
-	
 	shader->use();
 
 	glActiveTexture(GL_TEXTURE0);
@@ -146,8 +145,8 @@ void Renderer::render() {
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, texture2);
 
-	float camX = sin(glfwGetTime()) * radius;
-	float camZ = cos(glfwGetTime()) * radius;
+	double camX = sin(glfwGetTime()) * radius;
+	double camZ = cos(glfwGetTime()) * radius;
 	glm::mat4 view;
 	view = glm::lookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
 	shader->setMatrix4x4("view", view);

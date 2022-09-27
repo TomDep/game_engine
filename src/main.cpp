@@ -13,7 +13,7 @@ using namespace std;
 #include "UIManager.h"
 
 // Logging
-#include "spdlog/spdlog.h";
+#include "spdlog/spdlog.h"
 #include "graphics/Renderer.h"
 
 class MainApp {
@@ -72,9 +72,7 @@ private:
 		{
 			throw std::runtime_error("Failed to initialize GLAD");
 		}
-	}
 
-	void initOpenGL() {
 		glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 		glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 

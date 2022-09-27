@@ -71,7 +71,7 @@ private:
     unsigned int texture1;
     unsigned int texture2;
 
-    const float radius = 10.0f;
+    const double radius = 10.0f;
 
     Shader* shader;
 };
