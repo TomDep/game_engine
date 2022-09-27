@@ -3,30 +3,30 @@
 #include "math.h"
 #include <ostream>
 
-namespace parea {
+
 	class Vector4 {
 		public:
-			real x;
-			real y;
-			real z;
-			real w;
+			float x;
+			float y;
+			float z;
+			float w;
 
-			Vector4(const real x, const real y, const real z, const real w) : x(x), y(y), z(z), w(w) {}
+			Vector4(const float x, const float y, const float z, const float w) : x(x), y(y), z(z), w(w) {}
 	};
 
 	class Vector3 {
 		public:
-			real x;
-			real y;
-			real z;
+			float x;
+			float y;
+			float z;
 		private:
-			real pad;
+			float pad;
 
 		public:
 			/******* DEFAULT CONSTUCTOR *******/
 			Vector3() : x(0), y(0), z(0) {}
 			/******* EXPLICIT CONSTUCTOR *******/
-			Vector3(const real x, const real y, const real z) : x(x), y(y), z(z) {}
+			Vector3(const float x, const float y, const float z) : x(x), y(y), z(z) {}
 
 			/******* FLIP ALL COMPONENTS OF THE VECTOR *******/
 			void invert() {
@@ -35,25 +35,25 @@ namespace parea {
 				z = -z;
 			}
 			/******* VECTOR AND DIRECTION *******/
-			real magnitude() const {
-				return (real)sqrt(x * x + y * y + z * z);
+			float magnitude() const {
+				return (float)sqrt(x * x + y * y + z * z);
 			}
-			real squareMagnitude() const {
+			float squareMagnitude() const {
 				return x * x + y * y + z * z;
 			}
 			void normalize() {
-				real l = magnitude(); 
+				float l = magnitude();
 				if (l > 0) {					
-					(*this) *= ((real)1) / l;
+					(*this) *= ((float)1) / l;
 				} 
 			}
 			/******* SCALAR AND VECTOR MULTIPLICATION *******/
-			void operator*=(const real value) {
+			void operator*=(const float value) {
 				x *= value; 
 				y *= value; 
 				z *= value;
 			}
-			Vector3 operator*(const real value) const {
+			Vector3 operator*(const float value) const {
 				return Vector3(x * value, y * value, z * value);
 			}
 			/******* VECTOR ADDITION *******/
@@ -71,11 +71,15 @@ namespace parea {
 				y -= v.y;
 				z -= v.z;
 			}
+			Vector3 operator-(const float s) const {
+				return Vector3(x - s, y - s, z - s);
+			}
+
 			Vector3 operator-(const Vector3& v) const {
 				return Vector3(x - v.x, y - v.y, z - v.z);
 			}
 			/******* VECTOR ADDITION AND SCALING *******/
-			void addScaledVector(const Vector3& v, real scale) {
+			void addScaledVector(const Vector3& v, float scale) {
 				x += v.x * scale;
 				y += v.y * scale;
 				z += v.z * scale;
@@ -90,10 +94,10 @@ namespace parea {
 				return Vector3(x * v.x, y * v.y, z * v.z);
 			}
 			/******* SCALAR PRODUCT *******/
-			real scalarProduct(const Vector3& v) const {
+			float scalarProduct(const Vector3& v) const {
 				return x * v.x + y * v.y + z * v.z;
 			}
-			real operator*(const Vector3& v) const {
+			float operator*(const Vector3& v) const {
 				return x * v.x + y * v.y + z * v.z;
 			}
 			/******* VECTOR PRODUCT *******/
@@ -129,4 +133,3 @@ namespace parea {
 				return os << "Vector3 : x=" << vector.x << "\t\ty=" << vector.y << "\t\tz=" << vector.z;
 			}
 	};
-}

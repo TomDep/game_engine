@@ -154,7 +154,7 @@
     <ClInclude Include="lib\imgui\imstb_textedit.h" />
     <ClInclude Include="lib\imgui\imstb_truetype.h" />
     <ClInclude Include="src\physics\parea\core.h" />
-    <ClInclude Include="src\physics\parea\particle.h" />
+    <ClInclude Include="src\physics\parea\Particle.h" />
     <ClInclude Include="src\physics\parea\precision.h" />
     <ClInclude Include="src\physics\PhysicsManager.h" />
     <ClInclude Include="src\graphics\Shader.h" />
@@ -176,7 +176,7 @@
     <ClCompile Include="lib\imgui\imgui_tables.cpp" />
     <ClCompile Include="lib\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\physics\parea\particle.cpp" />
+    <ClCompile Include="src\physics\parea\Particle.cpp" />
     <ClCompile Include="src\physics\PhysicsManager.cpp" />
     <ClCompile Include="src\graphics\Renderer.cpp" />
     <ClCompile Include="src\graphics\Shader.cpp" />

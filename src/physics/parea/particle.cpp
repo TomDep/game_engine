@@ -1,28 +1,45 @@
 #pragma once
 
-#include <assert.h>
-#include "particle.h"
+#include "Particle.h"
 
-using namespace parea;
 
-void Particle::integrate(real duration) {
+
+
+/*******************CONSTRUCTORS*******************/
+Particle::Particle()
+{
+	position = Vector3(0.0, 0.0, 0.0);
+	velocity = Vector3(0.0, 0.0, 0.0);
+	acceleration = Vector3(0.0f, 0.0f, -G);
+	//hard values for testing
+	inverseMass = 1.0f;
+	damping = 1.0f;
+}
+
+Particle::Particle(Vector3 p, Vector3 v)
+{
+	position = p;
+	velocity = v;
+	acceleration = Vector3(0.0f, 0.0f, -G);
+	//hard values for testing
+	inverseMass = 1.0f;
+	damping = 1.0f;
+}
+
+
+void Particle::integrate(float dt) {
 	//Can not integrate object with infinite mass
-	if (inverseMass <= 0.0f) return; 
+	if (inverseMass <= 0.0f) return;
 
-	assert(duration > 0.0);
+	velocity = velocity + acceleration * dt;
+	//velocity -= damping * dt;
+	position = position + velocity * dt + acceleration * dt * dt;
 
-	// update linear position
-	Position.addScaledVector(Velocity, duration);
+	if (position.z < 0)
+		position.z = 0;
 
-	//Work out the acceleration from the force
-	Vector3 resultingAcc = Acceleration;
+}
 
-	//Update linear velocity from the acceleration
-	Velocity.addScaledVector(resultingAcc, duration);
-
-	//Impose drag.
-	Velocity *= real_pow(damping, duration);
-
-	//clear the forces
-	//clearAccumulator();
+void Particle::addForce(Vector3 force) {
+	velocity += force;
 }
