@@ -46,10 +46,10 @@ Renderer::Renderer(Camera* camera) : camera(camera) {
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	// 3. then set our vertex attributes pointers
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
 	// Adding texture
@@ -104,7 +104,7 @@ Renderer::Renderer(Camera* camera) : camera(camera) {
 	// we only need to bind to the VBO, the container's VBO's data already contains the data.
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	// set the vertex attribute 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
 	// Adding perspective
@@ -125,10 +125,13 @@ Renderer::Renderer(Camera* camera) : camera(camera) {
 	// Lighting
 	lightShader = new Shader("res/shaders/lightShader");
 
+	glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+	
 	shader->setVector3("objectColor", 1.0f, 0.5f, 0.31f);
 	shader->setVector3("lightColor", 1.0f, 1.0f, 1.0f);
+	shader->setVector3("lightPos", lightPos);
+	shader->setVector3("viewPos", camera->getPosition());
 
-	glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 	model = glm::mat4(1.0f);
 	model = glm::translate(model, lightPos);
 	model = glm::scale(model, glm::vec3(0.2f));
