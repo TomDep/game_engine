@@ -76,12 +76,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\dev\Libraries\glfw\bin\glfw-3.3.8.bin.WIN64\include;C:\dev\Libraries\glew\bin\glew-2.1.0\include;C:\dev\Libraries\imgui\imgui;C:\dev\Libraries\spdlog\include;C:\Users\Tom\Documents\physics_engine\res;C:\Users\Tom\Documents\physics_engine\lib\glad\includes;C:\dev\Libraries\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)lib\glew\include;$(SolutionDir)lib\spdlog\include;$(SolutionDir)lib\glfw\include;$(SolutionDir)lib\glad\include;$(SolutionDir)lib\glm\include;$(SolutionDir)lib\imgui</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\dev\Libraries\glfw\bin\glfw-3.3.8.bin.WIN64\lib-vc2022;C:\dev\Libraries\glew\bin\glew-2.1.0\lib\Release\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\glfw\lib;$(SolutionDir)lib\glew\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;glu32.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -93,14 +93,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\dev\Libraries\glfw\bin\glfw-3.3.8.bin.WIN64\include;C:\dev\Libraries\glew\bin\glew-2.1.0\include;C:\dev\Libraries\imgui\imgui;C:\dev\Libraries\spdlog\include;C:\Users\Tom\Documents\physics_engine\res;C:\Users\Tom\Documents\physics_engine\lib\glad\includes;C:\dev\Libraries\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)lib\glew\include;$(SolutionDir)lib\spdlog\include;$(SolutionDir)lib\glfw\include;$(SolutionDir)lib\glad\include;$(SolutionDir)lib\glm\include;$(SolutionDir)lib\imgui</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\dev\Libraries\glfw\bin\glfw-3.3.8.bin.WIN64\lib-vc2022;C:\dev\Libraries\glew\bin\glew-2.1.0\lib\Release\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\glfw\lib;$(SolutionDir)lib\glew\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;glu32.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -110,12 +110,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\dev\C++\glfw-3.3.8.bin.WIN64\include;C:\dev\C++\glew-2.1.0\include;C:\dev\C++\glm-master;C:\dev\C++\spdlog-1.x\include;$(SolutionDir)res;$(SolutionDir)lib\imgui;$(SolutionDir)lib\glad\includes</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)lib\glew\include;$(SolutionDir)lib\spdlog\include;$(SolutionDir)lib\glfw\include;$(SolutionDir)lib\glad\include;$(SolutionDir)lib\glm\include;$(SolutionDir)lib\imgui</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\dev\C++\glfw-3.3.8.bin.WIN64\lib-vc2022;C:\dev\C++\glew-2.1.0\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\glfw\lib;$(SolutionDir)lib\glew\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;glu32.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -127,14 +127,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\dev\Libraries\glfw\bin\glfw-3.3.8.bin.WIN64\include;C:\dev\Libraries\glew\bin\glew-2.1.0\include;C:\dev\Libraries\imgui\imgui;C:\dev\Libraries\spdlog\include;C:\Users\Tom\Documents\physics_engine\res;C:\Users\Tom\Documents\physics_engine\lib\glad\includes;C:\dev\Libraries\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)lib\glew\include;$(SolutionDir)lib\spdlog\include;$(SolutionDir)lib\glfw\include;$(SolutionDir)lib\glad\include;$(SolutionDir)lib\glm\include;$(SolutionDir)lib\imgui</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\dev\Libraries\glfw\bin\glfw-3.3.8.bin.WIN64\lib-vc2022;C:\dev\Libraries\glew\bin\glew-2.1.0\lib\Release\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\glfw\lib;$(SolutionDir)lib\glew\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;glu32.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -144,15 +144,18 @@
     <ClInclude Include="lib\imgui\backends\imgui_impl_glfw.h" />
     <ClInclude Include="lib\imgui\backends\imgui_impl_opengl3.h" />
     <ClInclude Include="lib\imgui\backends\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="lib\imgui\imconfig.h" />
+    <ClInclude Include="src\graphics\stb_image.h" />
+    <ClInclude Include="src\IconsFontAwesome.h" />
+    <ClInclude Include="lib\glad\includes\KHR\khrplatform.h" />
     <ClInclude Include="lib\imgui\imgui.h" />
+    <ClInclude Include="lib\imgui\backends\imgui_impl_glfw.h" />
+    <ClInclude Include="lib\imgui\backends\imgui_impl_opengl3.h" />
+    <ClInclude Include="lib\imgui\backends\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="lib\imgui\imconfig.h" />
     <ClInclude Include="lib\imgui\imgui_internal.h" />
     <ClInclude Include="lib\imgui\imstb_rectpack.h" />
     <ClInclude Include="lib\imgui\imstb_textedit.h" />
     <ClInclude Include="lib\imgui\imstb_truetype.h" />
-    <ClInclude Include="src\graphics\stb_image.h" />
-    <ClInclude Include="src\IconsFontAwesome.h" />
-    <ClInclude Include="lib\glad\includes\KHR\khrplatform.h" />
     <ClInclude Include="src\parea\core.h" />
     <ClInclude Include="src\parea\particle.h" />
     <ClInclude Include="src\parea\precision.h" />
@@ -187,12 +190,14 @@
     <ClCompile Include="lib\glad\src\glad.c" />
     <ClCompile Include="lib\imgui\backends\imgui_impl_glfw.cpp" />
     <ClCompile Include="lib\imgui\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\graphics\Camera.cpp" />
+    <ClCompile Include="lib\imgui\backends\imgui_impl_glfw.cpp" />
+    <ClCompile Include="lib\imgui\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="lib\imgui\imgui.cpp" />
     <ClCompile Include="lib\imgui\imgui_demo.cpp" />
     <ClCompile Include="lib\imgui\imgui_draw.cpp" />
     <ClCompile Include="lib\imgui\imgui_tables.cpp" />
     <ClCompile Include="lib\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="src\graphics\Camera.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\parea\particle.cpp" />
     <ClCompile Include="src\PhysicsManager.cpp" />
