@@ -9,13 +9,13 @@ void UIManager::init(GLFWwindow* window) {
 	// ImGUI Initialization
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	ImGuiIO& io = ImGui::GetIO();
 
-	//io.Fonts->AddFontDefault();
+	io.Fonts->AddFontDefault();
 	//Merge in icons from Font Awesome
-	//static const ImWchar icons_ranges[] = { ICON_MIN_FA, ICON_MAX_FA, 0 };
-	//ImFontConfig icons_config; icons_config.MergeMode = true; icons_config.PixelSnapH = true;
-	//io.Fonts->AddFontFromFileTTF("Librairies/resources/icons/fonts/" FONT_ICON_FILE_NAME_FAS, 16.0f, &icons_config, icons_ranges);
+	static const ImWchar icons_ranges[] = { ICON_MIN_FA, ICON_MAX_FA, 0 };
+	ImFontConfig icons_config; icons_config.MergeMode = true; icons_config.PixelSnapH = true;
+	io.Fonts->AddFontFromFileTTF("res/fonts/" FONT_ICON_FILE_NAME_FAS, 16.0f, &icons_config, icons_ranges);
 
 	ImGui::StyleColorsDark();
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
@@ -29,7 +29,7 @@ void UIManager::render() {
 	ImGui::NewFrame();
 
 	// UI INTERFACE
-	{
+	if(showWindow){
 		ImGui::SetNextWindowSize(ImVec2(400, 220), 0);
 
 		// ImGUI window creation
