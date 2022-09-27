@@ -4,6 +4,16 @@
 #include <ostream>
 
 namespace parea {
+	class Vector4 {
+		public:
+			real x;
+			real y;
+			real z;
+			real w;
+
+			Vector4(const real x, const real y, const real z, const real w) : x(x), y(y), z(z), w(w) {}
+	};
+
 	class Vector3 {
 		public:
 			real x;

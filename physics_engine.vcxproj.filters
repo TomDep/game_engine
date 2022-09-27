@@ -102,7 +102,7 @@
     <ClInclude Include="lib\glad\includes\KHR\khrplatform.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="src\Renderer.h">
+    <ClInclude Include="src\graphics\Renderer.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="src\parea\core.h">
@@ -114,7 +114,7 @@
     <ClInclude Include="src\parea\precision.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="src\shaders\shader.h">
+    <ClInclude Include="src\graphics\Shader.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="src\IconsFontAwesome.h">
@@ -147,10 +147,10 @@
     <ClInclude Include="lib\imgui\backends\imgui_impl_opengl3_loader.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\dev\Libraries\imgui\imgui\backends\imgui_impl_glfw.h">
+    <ClInclude Include="lib\imgui\backends\imgui_impl_glfw.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="lib\imgui\backends\imgui_impl_glfw.h">
+    <ClInclude Include="src\graphics\stb_image.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
@@ -166,7 +166,7 @@
     <ClCompile Include="src\parea\particle.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\shaders\shader.cpp">
+    <ClCompile Include="src\graphics\Shader.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="lib\glad\src\glad.c">
@@ -178,7 +178,7 @@
     <ClCompile Include="src\PhysicsManager.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer.cpp">
+    <ClCompile Include="src\graphics\Renderer.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\UIManager.cpp">
@@ -200,9 +200,6 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="lib\imgui\backends\imgui_impl_opengl3.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dev\Libraries\imgui\imgui\backends\imgui_impl_glfw.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="lib\imgui\backends\imgui_impl_glfw.cpp">

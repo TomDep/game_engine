@@ -14,7 +14,7 @@ using namespace std;
 
 // Logging
 #include "spdlog/spdlog.h";
-#include "Renderer.h"
+#include "graphics/Renderer.h"
 
 class MainApp {
 
@@ -79,6 +79,7 @@ private:
 		glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+		glEnable(GL_DEPTH_TEST);
 	}
 
 	void initUI() {
@@ -99,7 +100,7 @@ private:
 			// Updates
 
 			// Render
-			glClear(GL_COLOR_BUFFER_BIT);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			renderer->render();
 			uiManager->render();
