@@ -123,6 +123,9 @@
     <ClInclude Include="src\physics\parea\Vector4.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="src\graphics\Texture.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Librairies\resources\shaders\default.frag">
@@ -199,9 +202,17 @@
     <ClCompile Include="src\physics\parea\Vector3.h">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\Texture.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Font Include="res\fonts\fa-solid-900.ttf" />
     <Font Include="res\fonts\fa-solid-900-free.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\images\container2.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
   </ItemGroup>
 </Project>

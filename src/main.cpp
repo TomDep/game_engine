@@ -1,3 +1,5 @@
+#pragma once
+
 // Basics
 #include <iostream>						// Standard I/O streams
 #include <sstream>
@@ -109,8 +111,8 @@ public:
 		}
 	}
 
-	const uint32_t WINDOW_WIDTH = 800;
-	const uint32_t WINDOW_HEIGHT = 600;
+	static const uint32_t WINDOW_WIDTH = 800;
+	static const uint32_t WINDOW_HEIGHT = 600;
 	const int GL_VERSION_MAJOR = 3, GL_VERSION_MINOR = 3;
 
 	static void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
@@ -210,11 +212,11 @@ private:
 	void initScene() {
 		scene = new Scene();
 
-		Entity* ground = new Entity(glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(20.0f, 1.0f, 20.0f), glm::vec3(0.0f));
-		Entity* cube = new Entity(glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
-		cube->addRigidBody(new RigidBody(cube->getPosition()));
+		//Entity* ground = new Entity(glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(20.0f, 1.0f, 20.0f), glm::vec3(0.0f));
+		Entity* cube = new Entity(glm::vec3(0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
+		//cube->addRigidBody(new RigidBody(cube->getPosition()));
 
-		scene->addEntity(ground);
+		//scene->addEntity(ground);
 		scene->addEntity(cube);
 
 		physicsManager->setCurrentScene(scene);

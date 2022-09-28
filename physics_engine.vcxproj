@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\graphics\Texture.h" />
     <ClInclude Include="src\physics\parea\Vector4.h" />
     <ClInclude Include="src\physics\RigidBody.h" />
     <ClInclude Include="src\gameObjects\Player.h" />
@@ -182,6 +183,7 @@
     <ClCompile Include="lib\imgui\imgui_draw.cpp" />
     <ClCompile Include="lib\imgui\imgui_tables.cpp" />
     <ClCompile Include="lib\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="src\graphics\Texture.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\physics\parea\Particle.cpp" />
     <ClCompile Include="src\physics\parea\Vector3.h" />
@@ -194,6 +196,9 @@
   <ItemGroup>
     <Font Include="res\fonts\fa-solid-900-free.ttf" />
     <Font Include="res\fonts\fa-solid-900.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\images\container2.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
