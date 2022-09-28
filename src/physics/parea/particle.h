@@ -1,7 +1,7 @@
 #pragma once
 
 #include "precision.h"
-#include "core.h"
+#include "Vector3.h"
 
 
 class Particle {

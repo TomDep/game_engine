@@ -2,9 +2,6 @@
 
 #include "Particle.h"
 
-
-
-
 /*******************CONSTRUCTORS*******************/
 Particle::Particle()
 {

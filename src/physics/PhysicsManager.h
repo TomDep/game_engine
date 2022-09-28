@@ -1,14 +1,19 @@
 #pragma once
-#include "parea/Particle.h"
+#include "../gameObjects/Scene.h"
 
 class PhysicsManager
 {
 public:
+	static const float G;
+
 	PhysicsManager();
 
 	void update(float dt);
 
+	/* ---------- Getters & Setters ---------- */
+	void setCurrentScene(Scene* scene) { currentScene = scene; }
+
 private:
-	Particle* u;
+	Scene* currentScene = nullptr;
 };
 

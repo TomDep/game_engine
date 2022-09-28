@@ -3,6 +3,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "../physics/RigidBody.h"
+
 class Entity {
 public:
 	Entity(glm::vec3 p, glm::vec3 s, glm::vec4 r) {
@@ -23,6 +25,9 @@ public:
 	glm::mat4 getModel() const { return model; }
 	glm::vec3 getScale() const { return scale; }
 	glm::vec3 getPosition() const { return position; }
+
+	void addRigidBody(RigidBody* rb) { rigidBody = rb; }
+	RigidBody* getRigidBody() const { return rigidBody; }
 private:
 	void updateModelMatrix() {
 		model = glm::mat4(1.0f);
@@ -36,5 +41,8 @@ private:
 	glm::vec4 rotation;
 
 	glm::mat4 model;
+
+	/* Components */
+	RigidBody* rigidBody = nullptr;
 };
 

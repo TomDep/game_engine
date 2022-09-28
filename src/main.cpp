@@ -21,6 +21,8 @@ using namespace std;
 #include "graphics/Renderer.h"
 #include "graphics/Camera.h"
 #include "physics/PhysicsManager.h"
+#include "physics/RigidBody.h"
+#include "gameObjects/Scene.h"
 
 class MainApp {
 public:
@@ -208,11 +210,14 @@ private:
 	void initScene() {
 		scene = new Scene();
 
-		Entity* ground = new Entity(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(20.0f, 0.2f, 20.0f), glm::vec4(0.0f));
-		Entity* cube = new Entity(glm::vec3(1.0f), glm::vec3(1.0f), glm::vec4(0.0f));
+		Entity* ground = new Entity(glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(20.0f, 1.0f, 20.0f), glm::vec4(0.0f));
+		Entity* cube = new Entity(glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(1.0f), glm::vec4(0.0f));
+		cube->addRigidBody(new RigidBody(cube->getPosition()));
+
 		scene->addEntity(ground);
 		scene->addEntity(cube);
 
+		physicsManager->setCurrentScene(scene);
 		renderer->setCurrentScene(scene);
 	}
 

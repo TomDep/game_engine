@@ -139,6 +139,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\physics\parea\Vector4.h" />
+    <ClInclude Include="src\physics\RigidBody.h" />
     <ClInclude Include="src\gameObjects\Player.h" />
     <ClInclude Include="src\gameObjects\Entity.h" />
     <ClInclude Include="src\gameObjects\Scene.h" />
@@ -156,7 +158,6 @@
     <ClInclude Include="lib\imgui\imstb_rectpack.h" />
     <ClInclude Include="lib\imgui\imstb_textedit.h" />
     <ClInclude Include="lib\imgui\imstb_truetype.h" />
-    <ClInclude Include="src\physics\parea\core.h" />
     <ClInclude Include="src\physics\parea\Particle.h" />
     <ClInclude Include="src\physics\parea\precision.h" />
     <ClInclude Include="src\physics\PhysicsManager.h" />
@@ -183,9 +184,11 @@
     <ClCompile Include="lib\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\physics\parea\Particle.cpp" />
+    <ClCompile Include="src\physics\parea\Vector3.h" />
     <ClCompile Include="src\physics\PhysicsManager.cpp" />
     <ClCompile Include="src\graphics\Renderer.cpp" />
     <ClCompile Include="src\graphics\Shader.cpp" />
+    <ClCompile Include="src\physics\RigidBody.cpp" />
     <ClCompile Include="src\ui\UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
