@@ -201,7 +201,7 @@ private:
 		glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 		glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
-		Camera * camera = new Camera(cameraPos, cameraFront, cameraUp);
+		Camera * camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT, cameraPos, cameraFront, cameraUp);
 		renderer = new Renderer(camera);
 	}
 

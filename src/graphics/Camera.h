@@ -8,7 +8,7 @@
 class Camera {
 
 public:
-	Camera(glm::vec3 pos, glm::vec3 front, glm::vec3 up) : pos(pos), front(front), up(up) {};
+	Camera(int width, int height, glm::vec3 pos, glm::vec3 front, glm::vec3 up) : width(width), height(height), pos(pos), front(front), up(up) {};
 
 	glm::mat4 getView() {
 		return glm::lookAt(pos, pos + front, up);
@@ -49,7 +49,12 @@ public:
 		canMove = b;
 	}
 
+	int getWidth() const { return width; }
+	int getHeight() const { return height; }
+
 private:
+	int width, height; // Window size
+
 	glm::vec3 pos, front, up;
 	float yaw = 0.0f, pitch = -90.0f;
 

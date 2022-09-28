@@ -126,6 +126,12 @@
     <ClInclude Include="src\graphics\Texture.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="src\graphics\Light.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\Material.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Librairies\resources\shaders\default.frag">
@@ -203,6 +209,12 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\Texture.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\Light.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\Material.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

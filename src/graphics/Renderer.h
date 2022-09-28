@@ -3,7 +3,12 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "../gameObjects/Scene.h"
-#include "Texture.h"
+#include "Material.h"
+#include "Light.h"
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class Renderer {
 public:
@@ -18,7 +23,7 @@ public:
     float getFov() { return fov; }
     void setFov(float f) { 
         fov = f; 
-        glm::mat4 projection = glm::perspective(glm::radians(fov), 800.0f / 600.0f, 0.1f, 100.0f);
+        glm::mat4 projection = glm::perspective(glm::radians(fov), (float)camera->getWidth() / (float)camera->getHeight(), 0.1f, 100.0f);
         shader->use();
         shader->setMatrix4x4("projection", projection);
 
@@ -79,7 +84,8 @@ private:
     unsigned int lightVAO;
 
     unsigned int EBO;
-    Texture* texture;
+    Material* material;
+    Light* light;
 
     Shader* shader;
     Shader* lightShader;

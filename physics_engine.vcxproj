@@ -139,6 +139,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\graphics\Light.h" />
+    <ClInclude Include="src\graphics\Material.h" />
     <ClInclude Include="src\graphics\Texture.h" />
     <ClInclude Include="src\physics\parea\Vector4.h" />
     <ClInclude Include="src\physics\RigidBody.h" />
@@ -183,6 +185,8 @@
     <ClCompile Include="lib\imgui\imgui_draw.cpp" />
     <ClCompile Include="lib\imgui\imgui_tables.cpp" />
     <ClCompile Include="lib\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="src\graphics\Light.cpp" />
+    <ClCompile Include="src\graphics\Material.cpp" />
     <ClCompile Include="src\graphics\Texture.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\physics\parea\Particle.cpp" />
