@@ -15,7 +15,15 @@ public:
     void setCurrentScene(Scene* scene) { currentScene = scene; }
 
     float getFov() { return fov; }
-    void setFov(float f) { fov = f; }
+    void setFov(float f) { 
+        fov = f; 
+        glm::mat4 projection = glm::perspective(glm::radians(fov), 800.0f / 600.0f, 0.1f, 100.0f);
+        shader->use();
+        shader->setMatrix4x4("projection", projection);
+
+        lightShader->use();
+        lightShader->setMatrix4x4("projection", projection);
+    }
 
 private:
 
