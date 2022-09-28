@@ -130,6 +130,8 @@ public:
 		initUI();
 		initScene();
 
+		spdlog::info("Initialization complete !");
+
 		mainLoop();
 
 		cleanUp();
@@ -197,12 +199,15 @@ private:
 	}
 
 	void initRenderer() {
+		spdlog::debug("[INITIALIZATION][RENDERER] Start");
 		glm::vec3 cameraPos = glm::vec3(0.0f, 1.0f, 7.0f);
 		glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 		glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
 		Camera * camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT, cameraPos, cameraFront, cameraUp);
 		renderer = new Renderer(camera);
+
+		spdlog::debug("[INITIALIZATION][RENDERER] Done");
 	}
 
 	void initPhysics() {
@@ -210,9 +215,17 @@ private:
 	}
 
 	void initScene() {
+		spdlog::debug("[INITIALIZATION][SCENE] Start");
 		scene = new Scene();
 
-		//Entity* ground = new Entity(glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(20.0f, 1.0f, 20.0f), glm::vec3(0.0f));
+		// Adding lights
+		
+		PointLight* light = new PointLight(glm::vec3(1.2f, 1.0f, 2.0f), 1.0f, 0.045f, 0.0075f, glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.0f));
+		DirectionalLight* sun = new DirectionalLight(glm::vec3(-0.2f, -1.0f, -0.3f), glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.0f));
+		scene->setDirectionalLight(sun);
+		scene->addPointLight(light);
+		
+		// Adding entities
 		Entity* cube = new Entity(glm::vec3(0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
 		//cube->addRigidBody(new RigidBody(cube->getPosition()));
 
@@ -221,6 +234,8 @@ private:
 
 		physicsManager->setCurrentScene(scene);
 		renderer->setCurrentScene(scene);
+	
+		spdlog::debug("[INITIALIZATION][SCENE] Done");
 	}
 
 	void mainLoop() {

@@ -4,7 +4,9 @@
 #include "Camera.h"
 #include "../gameObjects/Scene.h"
 #include "Material.h"
-#include "Light.h"
+
+#include "lights/DirectionalLight.h"
+#include "lights/PointLight.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -32,6 +34,9 @@ public:
     }
 
 private:
+
+    void renderEntities();
+    void renderLights();
 
     float vertices[288] = {
         // positions          // normals           // texture coords
