@@ -14,6 +14,9 @@ public:
     Camera* getCamera() const { return camera; }
     void setCurrentScene(Scene* scene) { currentScene = scene; }
 
+    float getFov() { return fov; }
+    void setFov(float f) { fov = f; }
+
 private:
 
     float vertices[216] = {
@@ -73,7 +76,8 @@ private:
     Shader* lightShader;
 
     Camera* camera;
-
     Scene* currentScene;
+
+    float fov = 45.0f;
 };
 

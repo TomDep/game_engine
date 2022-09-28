@@ -114,7 +114,7 @@ Renderer::Renderer(Camera* camera) : camera(camera) {
 
 	// Camera :
 	glm::mat4 projection;
-	projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+	projection = glm::perspective(glm::radians(fov), 800.0f / 600.0f, 0.1f, 100.0f);
 
 	shader->setMatrix4x4("model", model);
 	shader->setMatrix4x4("view", camera->getView());

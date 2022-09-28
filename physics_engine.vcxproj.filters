@@ -54,7 +54,7 @@
     <ClInclude Include="src\physics\parea\core.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="src\physics\parea\particle.h">
+    <ClInclude Include="src\physics\parea\Particle.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="src\physics\parea\precision.h">
@@ -130,7 +130,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\physics\parea\particle.cpp">
+    <ClCompile Include="src\physics\parea\Particle.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\Shader.cpp">
@@ -190,5 +190,9 @@
     <ClCompile Include="src\gameObjects\Player.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="res\fonts\fa-solid-900.ttf" />
+    <Font Include="res\fonts\fa-solid-900-free.ttf" />
   </ItemGroup>
 </Project>
