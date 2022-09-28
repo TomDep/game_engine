@@ -36,8 +36,8 @@ public:
 	static void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
 		MainApp& app = MainApp::getInstance();
 
-		float xoffset = xpos - app.lastX;
-		float yoffset = app.lastY - ypos; // reversed since y-coordinates range from bottom to top
+		double xoffset = xpos - app.lastX;
+		double yoffset = app.lastY - ypos; // reversed since y-coordinates range from bottom to top
 		app.lastX = xpos;
 		app.lastY = ypos;
 
@@ -49,8 +49,8 @@ public:
 		float pitch = camera->getPitch();
 		float yaw = camera->getYaw();
 
-		pitch += yoffset;
-		yaw += xoffset;
+		pitch += (float) yoffset;
+		yaw += (float) xoffset;
 
 		if (pitch > 89.0f)
 			pitch = 89.0f;
@@ -144,7 +144,7 @@ public:
 	
 	Renderer* renderer;
 
-	float lastX = WINDOW_WIDTH / 2, lastY = WINDOW_HEIGHT / 2;
+	double lastX = (double)WINDOW_WIDTH / 2.0f, lastY = (double)WINDOW_HEIGHT / 2.0f;
 	bool firstMouse;
 
 private:
@@ -195,7 +195,7 @@ private:
 	}
 
 	void initRenderer() {
-		glm::vec3 cameraPos = glm::vec3(0.0f, 3.0f, 5.0f);
+		glm::vec3 cameraPos = glm::vec3(0.0f, 1.0f, 7.0f);
 		glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 		glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
@@ -210,8 +210,8 @@ private:
 	void initScene() {
 		scene = new Scene();
 
-		Entity* ground = new Entity(glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(20.0f, 1.0f, 20.0f), glm::vec4(0.0f));
-		Entity* cube = new Entity(glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(1.0f), glm::vec4(0.0f));
+		Entity* ground = new Entity(glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(20.0f, 1.0f, 20.0f), glm::vec3(0.0f));
+		Entity* cube = new Entity(glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
 		cube->addRigidBody(new RigidBody(cube->getPosition()));
 
 		scene->addEntity(ground);
@@ -225,7 +225,7 @@ private:
 		while (!glfwWindowShouldClose(window))
 		{
 			// Updates
-			float currentFrame = glfwGetTime();
+			float currentFrame = (float) glfwGetTime();
 			deltaTime = currentFrame - lastFrame;
 			lastFrame = currentFrame;
 

@@ -162,7 +162,7 @@ void Renderer::render() {
 		glm::vec3 scale = entity->getScale();
 		//spdlog::debug("Scale : ({}, {}, {})", scale.x, scale.y, scale.z);
 
-		shader->setMatrix4x4("model", entity->getModel());
+		shader->setMatrix4x4("model", entity->getModelMatrix());
 
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 	}
