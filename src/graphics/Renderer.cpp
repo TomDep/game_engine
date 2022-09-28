@@ -154,13 +154,18 @@ void Renderer::render() {
 	shader->use();
 	shader->setMatrix4x4("view", camera->getView());
 
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture1);
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, texture2);
-
 	glBindVertexArray(VAO);
-	glDrawArrays(GL_TRIANGLES, 0, 36);
+
+	// Get entities
+	std::vector<Entity*> entities = currentScene->getEntities();
+	for (Entity *entity : entities) {
+		glm::vec3 scale = entity->getScale();
+		//spdlog::debug("Scale : ({}, {}, {})", scale.x, scale.y, scale.z);
+
+		shader->setMatrix4x4("model", entity->getModel());
+
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+	}
 	
 	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

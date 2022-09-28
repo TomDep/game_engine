@@ -139,6 +139,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\gameObjects\Player.h" />
+    <ClInclude Include="src\gameObjects\Entity.h" />
+    <ClInclude Include="src\gameObjects\Scene.h" />
     <ClInclude Include="src\graphics\Camera.h" />
     <ClInclude Include="lib\glad\includes\glad\glad.h" />
     <ClInclude Include="src\graphics\stb_image.h" />
@@ -166,9 +169,12 @@
     <None Include="Librairies\resources\shaders\default.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\gameObjects\Player.cpp" />
+    <ClCompile Include="src\gameObjects\Entity.cpp" />
     <ClCompile Include="lib\glad\src\glad.c" />
     <ClCompile Include="lib\imgui\backends\imgui_impl_glfw.cpp" />
     <ClCompile Include="lib\imgui\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\gameObjects\Scene.cpp" />
     <ClCompile Include="src\graphics\Camera.cpp" />
     <ClCompile Include="lib\imgui\imgui.cpp" />
     <ClCompile Include="lib\imgui\imgui_demo.cpp" />

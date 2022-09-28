@@ -73,8 +73,8 @@ public:
 		camera->setPitchAndYaw(pitch, yaw);
 	}
 
-	const uint32_t WINDOW_WIDTH = 800;
-	const uint32_t WINDOW_HEIGHT = 600;
+	const uint32_t WINDOW_WIDTH = 1080;
+	const uint32_t WINDOW_HEIGHT = 720;
 	const int GL_VERSION_MAJOR = 3, GL_VERSION_MINOR = 3;
 
 	static void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
@@ -90,6 +90,7 @@ public:
 		initRenderer();
 		initPhysics();
 		initUI();
+		initScene();
 
 		mainLoop();
 
@@ -100,6 +101,7 @@ public:
 	GLFWwindow* window;
 	UIManager* uiManager;
 	PhysicsManager* physicsManager;
+	Scene* scene;
 	
 	float deltaTime = 0.0f;	// Time between current frame and last frame
 	float lastFrame = 0.0f; // Time of last frame
@@ -155,7 +157,7 @@ private:
 	}
 
 	void initRenderer() {
-		glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+		glm::vec3 cameraPos = glm::vec3(0.0f, 3.0f, 5.0f);
 		glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 		glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
@@ -167,10 +169,20 @@ private:
 		physicsManager = new PhysicsManager();
 	}
 
+	void initScene() {
+		scene = new Scene();
+
+		Entity* ground = new Entity(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(20.0f, 0.2f, 20.0f), glm::vec4(0.0f));
+		Entity* cube = new Entity(glm::vec3(1.0f), glm::vec3(1.0f), glm::vec4(0.0f));
+		scene->addEntity(ground);
+		scene->addEntity(cube);
+
+		renderer->setCurrentScene(scene);
+	}
+
 	void mainLoop() {
 		while (!glfwWindowShouldClose(window))
 		{
-			
 			// Updates
 			float currentFrame = glfwGetTime();
 			deltaTime = currentFrame - lastFrame;
