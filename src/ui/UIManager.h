@@ -32,8 +32,9 @@ public:
 	void setScene(Scene* scene) { currentScene = scene; }
 	Scene* getScene() const { return currentScene; }
 
+	void startSimulation();
+	void resetSimulation();
 private:
-
 	int newWeapon = 0;
 	float newGravity = 10.0f;
 	string selectedWeaponName = "";

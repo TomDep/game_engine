@@ -12,14 +12,15 @@
 #include "glad/glad.h"					
 #include <GLFW/glfw3.h>					// Must be included after glad
 
-using namespace std;
+#include "imgui.h"
+#include "backends/imgui_impl_glfw.h"
 
-// UI
-#include "ui/UIManager.h"
+using namespace std;
 
 // Logging
 #include "spdlog/spdlog.h"
 
+#include "ui/UIManager.h"
 #include "graphics/Renderer.h"
 #include "graphics/Camera.h"
 #include "physics/PhysicsManager.h"
@@ -42,6 +43,8 @@ public:
 		double yoffset = app.lastY - ypos; // reversed since y-coordinates range from bottom to top
 		app.lastX = xpos;
 		app.lastY = ypos;
+
+		if (app.uiManager->showWindow == true) return;
 
 		Camera* camera = app.renderer->getCamera();
 		const float sensitivity = camera->getSensitivity();
@@ -95,31 +98,22 @@ public:
 	{			
 		MainApp& app = MainApp::getInstance();
 
-		if (key == GLFW_KEY_P && action == GLFW_PRESS)
-		{
-			spdlog::debug("Meeeeee P");
-			//Camera* cam = app.renderer->getCamera();
-			
-			app.uiManager->buttonStart = true;
+		// Shortcuts
+		if (key == GLFW_KEY_P && action == GLFW_PRESS) app.uiManager->startSimulation();
+		if (key == GLFW_KEY_R && action == GLFW_PRESS) app.uiManager->resetSimulation();
 
-			/*if (app.uiManager->showWindow == true) {
-				app.uiManager->buttonStart = true;
-				app.uiManager->showWindow = false;	
-				cam->setCanMove(true);
+		if (key == GLFW_KEY_TAB && action == GLFW_PRESS) {
+			Camera* cam = app.renderer->getCamera();
+
+			if (app.uiManager->showWindow == true) {
+				app.uiManager->showWindow = false;
 				glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 			}
-			else{
+			else {
 				app.uiManager->showWindow = true;
-				cam->setCanMove(false);
 				glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-			}*/
+			}
 		}
-		if (key == GLFW_KEY_R && action == GLFW_PRESS) {
-			spdlog::debug("Meeeeee R");
-
-			app.uiManager->buttonRestart = true;
-		}
-
 	}
 
 	static const uint32_t WINDOW_WIDTH = 800;
@@ -182,11 +176,11 @@ private:
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, GL_VERSION_MINOR);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_RESIZABLE, true);
+		glfwSwapInterval(1); // Enable vsync
 
 		glfwMakeContextCurrent(window);
 
 		firstMouse = true;
-		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		glfwSetCursorPosCallback(window, mouse_callback);
 		glfwSetKeyCallback(window, key_callback);
 		glfwSetScrollCallback(window, scroll_callback);
@@ -239,8 +233,8 @@ private:
 		scene->addPointLight(light);
 		
 		// Adding entities
-		Entity* cube = new Entity(glm::vec3(0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
-		//cube->addRigidBody(new RigidBody(cube->getPosition()));
+		Entity* cube = new Entity(glm::vec3(0.0f, 5.0f, 0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
+		cube->addRigidBody(new RigidBody(cube->getPosition()));
 
 		//scene->addEntity(ground);
 		scene->addEntity(cube);
@@ -267,8 +261,10 @@ private:
 			// Render
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-			renderer->render();
 			uiManager->render();
+			renderer->render();
+
+			ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
 			// Swap the back buffer with the front buffer
 			glfwSwapBuffers(window);

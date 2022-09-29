@@ -22,10 +22,29 @@ void UIManager::init(GLFWwindow* window) {
 	ImGui_ImplOpenGL3_Init("#version 330");
 }
 
+void UIManager::startSimulation() {
+	spdlog::debug("Launching the {} with a gravity of {}", selectedWeaponName, newGravity);
+
+	physicsManager->setGravityConstant(newGravity);
+	physicsManager->enable();
+}
+
+void UIManager::resetSimulation() {
+	// Deactivate the physics
+	physicsManager->disable();
+
+	std::vector<Entity*>* entities = currentScene->getEntities();
+
+	// We should not be doing that !
+	// There should be a init state saved in the scene that is loaded when restarting the scene
+	Entity* myCube = entities->at(0);
+	myCube->setPosition(glm::vec3(0.0f, 5.0f, 0.0f));
+}
+
 void UIManager::render() {
 	PhysicsManager* pManager = getPhysicsManager();
 
-	// Tell OpenGL a new frame is about to begin
+	// Start the Dear ImGui frame
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
@@ -54,39 +73,26 @@ void UIManager::render() {
 		}
 
 		ImGui::Text("\nPlay with gravity!");
-		static float sliderGravity = pManager->getGravity();
-		ImGui::SliderFloat("###sliderGravity", &sliderGravity, 0.0f, 20.0f);
+		static float sliderGravity = physicsManager->getGravityConstant();
+		ImGui::SliderFloat("###sliderGravity", &sliderGravity, 0.0f, 50.0f);
 
 		if (sliderGravity != newGravity) {
 			newGravity = sliderGravity;
-			spdlog::debug("Hey! Just changed gravity to {}", newGravity);
 		}
 
 		if (ImGui::Button("Start###buttonStart", ImVec2(100, 25))) {
 			// When I press the button start
+			startSimulation();
 		}
 
-		if (buttonStart) {
-			spdlog::debug("Launching the {} with a gravity of {}", selectedWeaponName, newGravity);
-			pManager->setGravity(newGravity);
-			buttonStart = false;
-		}
-
-		if (buttonRestart) {
-			std::vector<Entity*> entities = currentScene->getEntities();
-			Entity* myCube = entities.at(0);
-			spdlog::debug("Getting the position {}", myCube->getPosition().y);
-
-			myCube->setPosition(glm::vec3(0.0f, 5.0f, 0.0f));
-			spdlog::debug("Getting the position {}", myCube->getPosition().y);
-
-			physicsManager->setCurrentScene(currentScene);
-
-			buttonRestart = false;
-		}
-
-		if (ImGui::Button("Restart###buttonRestart", ImVec2(100, 25))) {
+		if (ImGui::Button("Reset###buttonRestart", ImVec2(100, 25))) {
 			// When I press the button restart
+			resetSimulation();
+		}
+
+		if (ImGui::Button("Reset & Start", ImVec2(100, 25))) {
+			resetSimulation();
+			startSimulation();
 		}
 
 		// Ends the window
@@ -94,7 +100,6 @@ void UIManager::render() {
 	}
 
 	ImGui::Render();
-	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
 void UIManager::cleanUp() {

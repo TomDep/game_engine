@@ -64,14 +64,12 @@ private:
 	bool canMove = true;
 
 	void updateDirection() {
-		if (canMove) {
-			glm::vec3 direction;
+		glm::vec3 direction;
 
-			direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-			direction.y = sin(glm::radians(pitch));
-			direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+		direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+		direction.y = sin(glm::radians(pitch));
+		direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 		
-			front = glm::normalize(direction);
-		}
+		front = glm::normalize(direction);
 	}
 };
