@@ -41,13 +41,6 @@ public:
 
 		updateDirection();
 	}
-	
-	bool getCanMove() {
-		return canMove;
-	}
-	void setCanMove(bool b) {
-		canMove = b;
-	}
 
 	int getWidth() const { return width; }
 	int getHeight() const { return height; }
@@ -60,8 +53,6 @@ private:
 
 	float speed = 1.0f;
 	float sensitivity = 0.1f;
-
-	bool canMove = true;
 
 	void updateDirection() {
 		glm::vec3 direction;
