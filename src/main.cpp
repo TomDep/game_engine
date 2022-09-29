@@ -196,6 +196,7 @@ private:
 	void initUI() {
 		uiManager = new UIManager();
 		uiManager->init(window);
+		uiManager->setPhysicsManager(physicsManager);
 	}
 
 	void initRenderer() {
@@ -226,7 +227,7 @@ private:
 		scene->addPointLight(light);
 		
 		// Adding entities
-		Entity* cube = new Entity(glm::vec3(0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
+		Entity* cube = new Entity(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
 		//cube->addRigidBody(new RigidBody(cube->getPosition()));
 
 		//scene->addEntity(ground);

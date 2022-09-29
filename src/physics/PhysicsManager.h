@@ -4,8 +4,6 @@
 class PhysicsManager
 {
 public:
-	static const float G;
-
 	PhysicsManager();
 
 	void update(float dt);
@@ -13,7 +11,13 @@ public:
 	/* ---------- Getters & Setters ---------- */
 	void setCurrentScene(Scene* scene) { currentScene = scene; }
 
+	float getGravity() { return gravity; }
+	void setGravity(float g) { gravity = g; }
+
 private:
+	float gravity;
+	
 	Scene* currentScene = nullptr;
+
 };
 

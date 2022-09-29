@@ -4,10 +4,10 @@
 #include "RigidBody.h"
 
 // Defining physics constants
-const float PhysicsManager::G = 9.81f;
+const static float earthGravity = 9.81f;
 
 PhysicsManager::PhysicsManager() {
-
+	setGravity(earthGravity);
 }
 
 void PhysicsManager::update(float dt) {

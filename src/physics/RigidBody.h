@@ -18,6 +18,9 @@ public:
 	glm::vec3 getPosition() const { return position; }
 	glm::vec3 getVelocity() const { return velocity; }
 	glm::vec3 getAcceleration() const { return acceleration; }
+
+	void setAcceleration(glm::vec3 acc) { acceleration = acc; }
+
 private:
 	
 	// Forces will be applied to a dynamic object

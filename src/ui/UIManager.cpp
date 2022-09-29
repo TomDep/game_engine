@@ -10,8 +10,8 @@ void UIManager::init(GLFWwindow* window) {
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
-
 	io.Fonts->AddFontDefault();
+	
 	//Merge in icons from Font Awesome
 	static const ImWchar icons_ranges[] = { ICON_MIN_FA, ICON_MAX_FA, 0 };
 	ImFontConfig icons_config; icons_config.MergeMode = true; icons_config.PixelSnapH = true;
@@ -23,6 +23,8 @@ void UIManager::init(GLFWwindow* window) {
 }
 
 void UIManager::render() {
+	PhysicsManager* pManager = getPhysicsManager();
+
 	// Tell OpenGL a new frame is about to begin
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
@@ -52,12 +54,13 @@ void UIManager::render() {
 		}
 
 		ImGui::Text("\nPlay with gravity!");
-		static float sliderGravity = 10.0f;
+		static float sliderGravity = pManager->getGravity();
 		ImGui::SliderFloat("###sliderGravity", &sliderGravity, 0.0f, 20.0f);
 
 		if (sliderGravity != newGravity) {
 			newGravity = sliderGravity;
 			spdlog::debug("Hey! Just changed gravity to {}", newGravity);
+			pManager->setGravity(newGravity);
 		}
 
 		if (ImGui::Button("Launch###buttonStart", ImVec2(100, 25))) {
