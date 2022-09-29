@@ -234,12 +234,12 @@ private:
 
 		// Adding lights
 		
-		PointLight* light1 = new PointLight(glm::vec3(1.2f, 1.0f, 2.0f), 1.0f, 0.045f, 0.0075f, glm::vec3(0.2f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(1.0f));
-		PointLight* light2 = new PointLight(glm::vec3(-1.2f, 1.0f, 2.0f), 1.0f, 0.045f, 0.0075f, glm::vec3(0.2f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(1.0f));
+		//PointLight* light1 = new PointLight(glm::vec3(1.2f, 1.0f, 2.0f), 1.0f, 0.045f, 0.0075f, glm::vec3(0.2f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(1.0f));
+		//PointLight* light2 = new PointLight(glm::vec3(-1.2f, 1.0f, 2.0f), 1.0f, 0.045f, 0.0075f, glm::vec3(0.2f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(1.0f));
 		DirectionalLight* sun = new DirectionalLight(glm::vec3(-0.2f, -1.0f, -0.3f), glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.0f));
 		scene->setDirectionalLight(sun);
-		scene->addPointLight(light2);
-		scene->addPointLight(light1);
+		//scene->addPointLight(light2);
+		//scene->addPointLight(light1);
 
 		// Adding entities
 		Entity* cube = new Entity(glm::vec3(0.0f, 5.0f, 0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
