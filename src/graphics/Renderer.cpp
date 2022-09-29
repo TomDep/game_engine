@@ -113,33 +113,38 @@ void Renderer::renderLights() {
 	}
 	
 	// Point lights
-	/*
+
+	// Number of point lights
+	shader->setInt("nbOfPointLights", currentScene->getNumberOfPointLight());
+	
 	PointLight** pointLights = currentScene->getPointLights();
 	for (int i = 0; i < currentScene->getNumberOfPointLight(); i++) {
 		PointLight* light = pointLights[i];
 
 		shader->use();
-		shader->setVector3("pointLights[" + to_string(i) + ".position", light->getPosition());
+		shader->setVector3("pointLights[" + to_string(i) + "].position", light->getPosition());
 
-		shader->setVector3("pointLights[" + to_string(i) + ".ambient", light->getAmbient());
-		shader->setVector3("pointLights[" + to_string(i) + ".diffuse", light->getDiffuse());
-		shader->setVector3("pointLights[" + to_string(i) + ".specular", light->getSpecular());
+		shader->setVector3("pointLights[" + to_string(i) + "].ambient", light->getAmbient());
+		shader->setVector3("pointLights[" + to_string(i) + "].diffuse", light->getDiffuse());
+		shader->setVector3("pointLights[" + to_string(i) + "].specular", light->getSpecular());
 		
-		shader->setFloat("pointLights[" + to_string(i) + ".constant", light->getConstant());
-		shader->setFloat("pointLights[" + to_string(i) + ".linear", light->getLinear());
-		shader->setFloat("pointLights[" + to_string(i) + ".quadratic", light->getQuadratic());
+		shader->setFloat("pointLights[" + to_string(i) + "].constant", light->getConstant());
+		shader->setFloat("pointLights[" + to_string(i) + "].linear", light->getLinear());
+		shader->setFloat("pointLights[" + to_string(i) + "].quadratic", light->getQuadratic());
 	
 		// Render cubes for point lights
 		lightShader->use();
 
 		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::translate(model, light->getPosition());
 		model = glm::scale(model, glm::vec3(0.2f));
 
 		lightShader->setMatrix4x4("model", model);
+		lightShader->setMatrix4x4("view", camera->getView());
+		lightShader->setVector3("lightColor", light->getDiffuse());
 		
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 	}
-	*/
 }
 
 void Renderer::renderEntities() {
