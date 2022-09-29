@@ -14,10 +14,9 @@ public:
 	Scene() {}
 
 	/* ---------- Getters & Setters ---------- */
-	std::vector<Entity*> getEntities() const { return entities; }
-
+	std::vector<Entity*>* getEntities() const { return entities; }
 	void addEntity(Entity* entity) {
-		entities.push_back(entity);
+		entities->push_back(entity);
 	}
 
 	void setDirectionalLight(DirectionalLight* light) { directionalLight = light; }
@@ -37,7 +36,7 @@ public:
 	int getNumberOfPointLight() const { return nbOfPointLights; }
 
 private:
-	std::vector<Entity*> entities;
+	std::vector<Entity*>* entities = new std::vector<Entity*>();
 
 	DirectionalLight* directionalLight = nullptr;
 

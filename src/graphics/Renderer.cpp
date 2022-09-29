@@ -158,8 +158,8 @@ void Renderer::renderEntities() {
 	glBindVertexArray(VAO);
 
 	// render entities
-	std::vector<Entity*> entities = currentScene->getEntities();
-	for (Entity* entity : entities) {
+	std::vector<Entity*>* entities = currentScene->getEntities();
+	for (Entity* entity : *entities) {
 		shader->setMatrix4x4("model", entity->getModelMatrix());
 
 		glDrawArrays(GL_TRIANGLES, 0, 36);

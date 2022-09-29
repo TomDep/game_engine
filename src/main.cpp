@@ -12,14 +12,15 @@
 #include "glad/glad.h"					
 #include <GLFW/glfw3.h>					// Must be included after glad
 
-using namespace std;
+#include "imgui.h"
+#include "backends/imgui_impl_glfw.h"
 
-// UI
-#include "ui/UIManager.h"
+using namespace std;
 
 // Logging
 #include "spdlog/spdlog.h"
 
+#include "ui/UIManager.h"
 #include "graphics/Renderer.h"
 #include "graphics/Camera.h"
 #include "physics/PhysicsManager.h"
@@ -42,6 +43,8 @@ public:
 		double yoffset = app.lastY - ypos; // reversed since y-coordinates range from bottom to top
 		app.lastX = xpos;
 		app.lastY = ypos;
+
+		if (app.uiManager->showWindow == true) return;
 
 		Camera* camera = app.renderer->getCamera();
 		const float sensitivity = camera->getSensitivity();
@@ -77,9 +80,10 @@ public:
 		camera->setPitchAndYaw(pitch, yaw);
 	}
 
-	static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-	{
+	static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
 		MainApp& app = MainApp::getInstance();
+		if (app.uiManager->showWindow == true) return;
+
 		float fov = app.renderer->getFov();
 		fov -= (float)yoffset;
 
@@ -92,32 +96,36 @@ public:
 	}
 
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-	{
-		if (key == GLFW_KEY_TAB && action == GLFW_PRESS)
-		{
-			MainApp& app = MainApp::getInstance();
+	{			
+		MainApp& app = MainApp::getInstance();
+
+		// Shortcuts
+		if (key == GLFW_KEY_P && action == GLFW_PRESS) app.uiManager->startSimulation();
+		if (key == GLFW_KEY_R && action == GLFW_PRESS) app.uiManager->resetSimulation();
+
+		if (key == GLFW_KEY_TAB && action == GLFW_PRESS) {
 			Camera* cam = app.renderer->getCamera();
-			
+
 			if (app.uiManager->showWindow == true) {
-				app.uiManager->showWindow = false;	
-				cam->setCanMove(true);
+				app.uiManager->showWindow = false;
 				glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 			}
-			else{
+			else {
 				app.uiManager->showWindow = true;
-				cam->setCanMove(false);
 				glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-			}	
+			}
 		}
 	}
 
-	static const uint32_t WINDOW_WIDTH = 800;
-	static const uint32_t WINDOW_HEIGHT = 600;
-	const int GL_VERSION_MAJOR = 3, GL_VERSION_MINOR = 3;
-
 	static void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 		glViewport(0, 0, width, height);
+		MainApp& app = MainApp::getInstance();
+
+		app.WINDOW_WIDTH = width;
+		app.WINDOW_HEIGHT = height;
 	}
+
+	const int GL_VERSION_MAJOR = 3, GL_VERSION_MINOR = 3;
 
 public:
 
@@ -127,8 +135,8 @@ public:
 		initOpenGL();
 		initRenderer();
 		initPhysics();
-		initUI();
 		initScene();
+		initUI();
 
 		spdlog::info("Initialization complete !");
 
@@ -142,6 +150,9 @@ public:
 	UIManager* uiManager;
 	PhysicsManager* physicsManager;
 	Scene* scene;
+
+	uint32_t WINDOW_WIDTH = 800;
+	uint32_t WINDOW_HEIGHT = 600;
 	
 	float deltaTime = 0.0f;	// Time between current frame and last frame
 	float lastFrame = 0.0f; // Time of last frame
@@ -171,14 +182,15 @@ private:
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, GL_VERSION_MINOR);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_RESIZABLE, true);
+		glfwSwapInterval(1); // Enable vsync
 
 		glfwMakeContextCurrent(window);
 
 		firstMouse = true;
-		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		glfwSetCursorPosCallback(window, mouse_callback);
 		glfwSetKeyCallback(window, key_callback);
 		glfwSetScrollCallback(window, scroll_callback);
+		glfwSetWindowSizeCallback(window, framebuffer_size_callback);
 	}
 
 	void initOpenGL() {
@@ -196,6 +208,8 @@ private:
 	void initUI() {
 		uiManager = new UIManager();
 		uiManager->init(window);
+		uiManager->setPhysicsManager(physicsManager);
+		uiManager->setScene(scene);
 	}
 
 	void initRenderer() {
@@ -228,8 +242,8 @@ private:
 		scene->addPointLight(light1);
 
 		// Adding entities
-		Entity* cube = new Entity(glm::vec3(0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
-		//cube->addRigidBody(new RigidBody(cube->getPosition()));
+		Entity* cube = new Entity(glm::vec3(0.0f, 5.0f, 0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
+		cube->addRigidBody(new RigidBody(cube->getPosition()));
 
 		//scene->addEntity(ground);
 		scene->addEntity(cube);
@@ -256,8 +270,10 @@ private:
 			// Render
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-			renderer->render();
 			uiManager->render();
+			renderer->render();
+
+			ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
 			// Swap the back buffer with the front buffer
 			glfwSwapBuffers(window);

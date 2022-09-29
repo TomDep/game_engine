@@ -17,6 +17,8 @@ public:
 	void setPosition(glm::vec3 newPosition) {
 		position = newPosition;
 		updateModelMatrix();
+
+		if (rigidBody != nullptr) rigidBody->setPosition(position);
 	}
 
 	glm::vec3 getScale() const { return scale; }

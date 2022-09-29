@@ -20,6 +20,8 @@ public:
 
     /* ----- Getters & Setters ----- */
     Camera* getCamera() const { return camera; }
+
+    Scene* getScene() const { return currentScene; }
     void setCurrentScene(Scene* scene) { currentScene = scene; }
 
     float getFov() { return fov; }
