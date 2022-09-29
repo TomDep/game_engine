@@ -21,9 +21,9 @@ public:
 	void render();
 	void cleanUp();	
 	
+	/* ---------- Variables ---------- */
+
 	bool showWindow = true;
-	bool buttonStart = false;
-	bool buttonRestart = false;
 
 	/* ---------- Components ---------- */
 	void setPhysicsManager(PhysicsManager* pManager) { physicsManager = pManager; }
@@ -35,9 +35,12 @@ public:
 	void startSimulation();
 	void resetSimulation();
 private:
-	int newWeapon = 0;
+
+	/* ---------- Variables ---------- */
+
 	float newGravity = 10.0f;
-	string selectedWeaponName = "";
+
+	bool toggleDebug = false;
 
 	/* ---------- Components ---------- */
 	PhysicsManager* physicsManager = nullptr;
