@@ -11,7 +11,6 @@ PhysicsManager::PhysicsManager() {
 }
 
 void PhysicsManager::update(float dt) {
-	
 	std::vector<Entity*> entities = currentScene->getEntities();
 	for (Entity* entity : entities) {
 		RigidBody* rigidBody = entity->getRigidBody();

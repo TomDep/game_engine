@@ -60,11 +60,33 @@ void UIManager::render() {
 		if (sliderGravity != newGravity) {
 			newGravity = sliderGravity;
 			spdlog::debug("Hey! Just changed gravity to {}", newGravity);
-			pManager->setGravity(newGravity);
 		}
 
-		if (ImGui::Button("Launch###buttonStart", ImVec2(100, 25))) {
+		if (ImGui::Button("Start###buttonStart", ImVec2(100, 25))) {
+			// When I press the button start
+		}
+
+		if (buttonStart) {
 			spdlog::debug("Launching the {} with a gravity of {}", selectedWeaponName, newGravity);
+			pManager->setGravity(newGravity);
+			buttonStart = false;
+		}
+
+		if (buttonRestart) {
+			std::vector<Entity*> entities = currentScene->getEntities();
+			Entity* myCube = entities.at(0);
+			spdlog::debug("Getting the position {}", myCube->getPosition().y);
+
+			myCube->setPosition(glm::vec3(0.0f, 5.0f, 0.0f));
+			spdlog::debug("Getting the position {}", myCube->getPosition().y);
+
+			physicsManager->setCurrentScene(currentScene);
+
+			buttonRestart = false;
+		}
+
+		if (ImGui::Button("Restart###buttonRestart", ImVec2(100, 25))) {
+			// When I press the button restart
 		}
 
 		// Ends the window

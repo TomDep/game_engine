@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GLFW/glfw3.h>
+//#include <GLFW/glfw3.h>
 #include <string>
 
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
@@ -21,11 +21,16 @@ public:
 	void render();
 	void cleanUp();	
 	
-	bool showWindow = false;
+	bool showWindow = true;
+	bool buttonStart = false;
+	bool buttonRestart = false;
 
 	/* ---------- Components ---------- */
 	void setPhysicsManager(PhysicsManager* pManager) { physicsManager = pManager; }
 	PhysicsManager* getPhysicsManager() const { return physicsManager; }
+
+	void setScene(Scene* scene) { currentScene = scene; }
+	Scene* getScene() const { return currentScene; }
 
 private:
 
@@ -35,5 +40,6 @@ private:
 
 	/* ---------- Components ---------- */
 	PhysicsManager* physicsManager = nullptr;
+	Scene* currentScene = nullptr;
 };
 

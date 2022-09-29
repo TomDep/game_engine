@@ -92,13 +92,18 @@ public:
 	}
 
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-	{
-		if (key == GLFW_KEY_TAB && action == GLFW_PRESS)
+	{			
+		MainApp& app = MainApp::getInstance();
+
+		if (key == GLFW_KEY_P && action == GLFW_PRESS)
 		{
-			MainApp& app = MainApp::getInstance();
-			Camera* cam = app.renderer->getCamera();
+			spdlog::debug("Meeeeee P");
+			//Camera* cam = app.renderer->getCamera();
 			
-			if (app.uiManager->showWindow == true) {
+			app.uiManager->buttonStart = true;
+
+			/*if (app.uiManager->showWindow == true) {
+				app.uiManager->buttonStart = true;
 				app.uiManager->showWindow = false;	
 				cam->setCanMove(true);
 				glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -107,8 +112,14 @@ public:
 				app.uiManager->showWindow = true;
 				cam->setCanMove(false);
 				glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-			}	
+			}*/
 		}
+		if (key == GLFW_KEY_R && action == GLFW_PRESS) {
+			spdlog::debug("Meeeeee R");
+
+			app.uiManager->buttonRestart = true;
+		}
+
 	}
 
 	static const uint32_t WINDOW_WIDTH = 800;
@@ -127,8 +138,8 @@ public:
 		initOpenGL();
 		initRenderer();
 		initPhysics();
-		initUI();
 		initScene();
+		initUI();
 
 		spdlog::info("Initialization complete !");
 
@@ -197,6 +208,7 @@ private:
 		uiManager = new UIManager();
 		uiManager->init(window);
 		uiManager->setPhysicsManager(physicsManager);
+		uiManager->setScene(scene);
 	}
 
 	void initRenderer() {
@@ -227,7 +239,7 @@ private:
 		scene->addPointLight(light);
 		
 		// Adding entities
-		Entity* cube = new Entity(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
+		Entity* cube = new Entity(glm::vec3(0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
 		//cube->addRigidBody(new RigidBody(cube->getPosition()));
 
 		//scene->addEntity(ground);
