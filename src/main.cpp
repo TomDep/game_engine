@@ -80,9 +80,10 @@ public:
 		camera->setPitchAndYaw(pitch, yaw);
 	}
 
-	static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-	{
+	static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
 		MainApp& app = MainApp::getInstance();
+		if (app.uiManager->showWindow == true) return;
+
 		float fov = app.renderer->getFov();
 		fov -= (float)yoffset;
 
@@ -116,13 +117,15 @@ public:
 		}
 	}
 
-	static const uint32_t WINDOW_WIDTH = 800;
-	static const uint32_t WINDOW_HEIGHT = 600;
-	const int GL_VERSION_MAJOR = 3, GL_VERSION_MINOR = 3;
-
 	static void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 		glViewport(0, 0, width, height);
+		MainApp& app = MainApp::getInstance();
+
+		app.WINDOW_WIDTH = width;
+		app.WINDOW_HEIGHT = height;
 	}
+
+	const int GL_VERSION_MAJOR = 3, GL_VERSION_MINOR = 3;
 
 public:
 
@@ -147,6 +150,9 @@ public:
 	UIManager* uiManager;
 	PhysicsManager* physicsManager;
 	Scene* scene;
+
+	uint32_t WINDOW_WIDTH = 800;
+	uint32_t WINDOW_HEIGHT = 600;
 	
 	float deltaTime = 0.0f;	// Time between current frame and last frame
 	float lastFrame = 0.0f; // Time of last frame
@@ -184,6 +190,7 @@ private:
 		glfwSetCursorPosCallback(window, mouse_callback);
 		glfwSetKeyCallback(window, key_callback);
 		glfwSetScrollCallback(window, scroll_callback);
+		glfwSetWindowSizeCallback(window, framebuffer_size_callback);
 	}
 
 	void initOpenGL() {
