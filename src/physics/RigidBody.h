@@ -6,14 +6,15 @@
 class RigidBody {
 
 public:
+	RigidBody() {};
 	RigidBody(glm::vec3 startingPosition);
 	RigidBody(glm::vec3 startingPosition, glm::vec3 startingVelocity);
 
 	void update(float dt, float gravityConstant);
 
 	/* ---------- Getters & Setters ---------- */
-	void setStatic() { dynamic = false; }
-	void setDynamic() { dynamic = true; }
+	void setDynamic(bool d) { dynamic = d; }
+	bool isDynamic() const { return dynamic; }
 
 	glm::vec3 getPosition() const { return position; }
 	void setPosition(glm::vec3 newPosition) { position = newPosition; }

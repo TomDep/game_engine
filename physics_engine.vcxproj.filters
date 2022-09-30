@@ -108,7 +108,7 @@
     <ClInclude Include="lib\imgui\imgui.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="src\gameObjects\Scene.h">
+    <ClInclude Include="src\scene\Scene.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="src\gameObjects\Entity.h">
@@ -138,6 +138,12 @@
     <ClInclude Include="src\graphics\lights\DirectionalLight.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="src\scene\SceneSerializer.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\EntityTree.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Librairies\resources\shaders\default.frag">
@@ -146,6 +152,7 @@
     <None Include="Librairies\resources\shaders\default.vert">
       <Filter>Fichiers de ressources\shaders</Filter>
     </None>
+    <None Include="libyaml-cpp.dll" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\physics\parea\Particle.cpp">
@@ -199,7 +206,7 @@
     <ClCompile Include="lib\imgui\imgui_widgets.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\gameObjects\Scene.cpp">
+    <ClCompile Include="src\scene\Scene.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\gameObjects\Entity.cpp">
@@ -227,6 +234,12 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\lights\DirectionalLight.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scene\SceneSerializer.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\EntityTree.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

@@ -10,12 +10,16 @@
 #include <backends/imgui_impl_opengl3.h>
 
 #include "../physics/PhysicsManager.h"
+#include "EntityTree.h"
 
 using namespace std;
 
 class UIManager {
 public:
-	UIManager() {};
+	UIManager(Scene* scene) : currentScene(scene) {
+		/* ----- UI Components ----- */
+		entityTree = new EntityTree(currentScene);
+	};
 
 	void init(GLFWwindow* window);
 	void render();
@@ -45,5 +49,8 @@ private:
 	/* ---------- Components ---------- */
 	PhysicsManager* physicsManager = nullptr;
 	Scene* currentScene = nullptr;
+
+	/* ---------- UI Components ---------- */
+	EntityTree* entityTree;
 };
 

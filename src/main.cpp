@@ -25,7 +25,8 @@ using namespace std;
 #include "graphics/Camera.h"
 #include "physics/PhysicsManager.h"
 #include "physics/RigidBody.h"
-#include "gameObjects/Scene.h"
+#include "scene/Scene.h"
+#include "scene/SceneSerializer.h"
 
 class MainApp {
 public:
@@ -206,10 +207,9 @@ private:
 	}
 
 	void initUI() {
-		uiManager = new UIManager();
+		uiManager = new UIManager(scene);
 		uiManager->init(window);
 		uiManager->setPhysicsManager(physicsManager);
-		uiManager->setScene(scene);
 	}
 
 	void initRenderer() {
@@ -232,14 +232,18 @@ private:
 		spdlog::debug("[INITIALIZATION][SCENE] Start");
 		scene = new Scene();
 
+		spdlog::debug("[INITIALIZATION][SCENE] Deserializing the scene");
+		SceneSerializer sceneSerializer(scene);
+		sceneSerializer.deserialize("res/scenes/testScene.yaml");
+
+		/*
 		// Adding lights
-		
-		//PointLight* light1 = new PointLight(glm::vec3(1.2f, 1.0f, 2.0f), 1.0f, 0.045f, 0.0075f, glm::vec3(0.2f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(1.0f));
-		//PointLight* light2 = new PointLight(glm::vec3(-1.2f, 1.0f, 2.0f), 1.0f, 0.045f, 0.0075f, glm::vec3(0.2f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(1.0f));
+		PointLight* light1 = new PointLight(glm::vec3(1.2f, 1.0f, 2.0f), 1.0f, 0.045f, 0.0075f, glm::vec3(0.2f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(1.0f));
+		PointLight* light2 = new PointLight(glm::vec3(-1.2f, 1.0f, 2.0f), 1.0f, 0.045f, 0.0075f, glm::vec3(0.2f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(1.0f));
 		DirectionalLight* sun = new DirectionalLight(glm::vec3(-0.2f, -1.0f, -0.3f), glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.0f));
 		scene->setDirectionalLight(sun);
-		//scene->addPointLight(light2);
-		//scene->addPointLight(light1);
+		scene->addPointLight(light2);
+		scene->addPointLight(light1);
 
 		// Adding entities
 		Entity* cube = new Entity(glm::vec3(0.0f, 5.0f, 0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
@@ -247,10 +251,11 @@ private:
 
 		//scene->addEntity(ground);
 		scene->addEntity(cube);
+		*/
 
 		physicsManager->setCurrentScene(scene);
 		renderer->setCurrentScene(scene);
-	
+
 		spdlog::debug("[INITIALIZATION][SCENE] Done");
 	}
 
