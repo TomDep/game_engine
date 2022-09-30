@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 
-#include "Entity.h"
+#include "../gameObjects/Entity.h"
 #include "../graphics/lights/DirectionalLight.h"
 #include "../graphics/lights/PointLight.h"
 

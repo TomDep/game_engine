@@ -2,7 +2,7 @@
 
 #include "Shader.h"
 #include "Camera.h"
-#include "../gameObjects/Scene.h"
+#include "../scene/Scene.h"
 #include "Material.h"
 
 #include "lights/DirectionalLight.h"

@@ -1,5 +1,5 @@
 #pragma once
-#include "../gameObjects/Scene.h"
+#include "../scene/Scene.h"
 
 // Defining physics constants
 const static float EARTH_GRAVITY = 9.81f;
