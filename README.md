@@ -1,8 +1,6 @@
-# physics_engine
+# Game Engine
 
-Creation of a physics engine for the video game class at UQAC - Université du Québec à Chicoutimi [CANADA]
-
-Realized by Aksel Vaillant, Clément Le Batard and Juliette Le Meudec
+Creation of a game engine using modern OpenGL.
 
 ## Configuration
 
@@ -27,8 +25,5 @@ You will find 3 important folders : lib, res and src.
 - res contains all our additional ressources like images, shaders, fonts and so on.
 - src contains all the physics engine with systems like UI (User Interface), graphics and finally physics.
 
-
-
-____
-Ci-joint, le journal de bord de l'équipe et les tâches attribuées à chacun -    
-[https://aksel-vaillant.notion.site/Game-Engine-f16a55379450476aa95a0bd65b625d17](https://aksel-vaillant.notion.site/Game-Engine-f16a55379450476aa95a0bd65b625d17)
+## Credits
+This is a original fork of (this repository)[https://github.com/aksel-vaillant/physics_engine] wich was made by Aksel Vaillant, Clément Le Batard and Juliette Le Meudec.
