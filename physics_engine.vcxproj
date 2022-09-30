@@ -76,13 +76,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)lib\glew\include;$(SolutionDir)lib\spdlog\include;$(SolutionDir)lib\glfw\include;$(SolutionDir)lib\glad\include;$(SolutionDir)lib\glm\include;$(SolutionDir)lib\imgui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)lib\glew\include;$(SolutionDir)lib\spdlog\include;$(SolutionDir)lib\glfw\include;$(SolutionDir)lib\glad\include;$(SolutionDir)lib\glm\include;$(SolutionDir)lib\imgui;$(SolutionDir)lib\yaml-cpp\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\glfw\lib;$(SolutionDir)lib\glew\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;glu32.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\glfw\lib;$(SolutionDir)lib\glew\lib;$(SolutionDir)lib\yaml-cpp\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;glu32.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;yaml-cppd.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -93,15 +93,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)lib\glew\include;$(SolutionDir)lib\spdlog\include;$(SolutionDir)lib\glfw\include;$(SolutionDir)lib\glad\include;$(SolutionDir)lib\glm\include;$(SolutionDir)lib\imgui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)lib\glew\include;$(SolutionDir)lib\spdlog\include;$(SolutionDir)lib\glfw\include;$(SolutionDir)lib\glad\include;$(SolutionDir)lib\glm\include;$(SolutionDir)lib\imgui;$(SolutionDir)lib\yaml-cpp\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\glfw\lib;$(SolutionDir)lib\glew\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;glu32.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\glfw\lib;$(SolutionDir)lib\glew\lib;$(SolutionDir)lib\yaml-cpp\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;glu32.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;yaml-cppd.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -110,13 +110,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)lib\glew\include;$(SolutionDir)lib\spdlog\include;$(SolutionDir)lib\glfw\include;$(SolutionDir)lib\glad\include;$(SolutionDir)lib\glm\include;$(SolutionDir)lib\imgui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)lib\glew\include;$(SolutionDir)lib\spdlog\include;$(SolutionDir)lib\glfw\include;$(SolutionDir)lib\glad\include;$(SolutionDir)lib\glm\include;$(SolutionDir)lib\imgui;$(SolutionDir)lib\yaml-cpp\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\glfw\lib;$(SolutionDir)lib\glew\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;glu32.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\glfw\lib;$(SolutionDir)lib\glew\lib;$(SolutionDir)lib\yaml-cpp\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;glu32.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;yaml-cppd.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -127,15 +127,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)lib\glew\include;$(SolutionDir)lib\spdlog\include;$(SolutionDir)lib\glfw\include;$(SolutionDir)lib\glad\include;$(SolutionDir)lib\glm\include;$(SolutionDir)lib\imgui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)lib\glew\include;$(SolutionDir)lib\spdlog\include;$(SolutionDir)lib\glfw\include;$(SolutionDir)lib\glad\include;$(SolutionDir)lib\glm\include;$(SolutionDir)lib\imgui;$(SolutionDir)lib\yaml-cpp\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\glfw\lib;$(SolutionDir)lib\glew\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;glu32.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\glfw\lib;$(SolutionDir)lib\glew\lib;$(SolutionDir)lib\yaml-cpp\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;glu32.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;yaml-cppd.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -148,10 +148,12 @@
     <ClInclude Include="src\physics\RigidBody.h" />
     <ClInclude Include="src\gameObjects\Player.h" />
     <ClInclude Include="src\gameObjects\Entity.h" />
-    <ClInclude Include="src\gameObjects\Scene.h" />
+    <ClInclude Include="src\scene\Scene.h" />
     <ClInclude Include="src\graphics\Camera.h" />
     <ClInclude Include="lib\glad\includes\glad\glad.h" />
     <ClInclude Include="src\graphics\stb_image.h" />
+    <ClInclude Include="src\scene\SceneSerializer.h" />
+    <ClInclude Include="src\ui\EntityTree.h" />
     <ClInclude Include="src\ui\IconsFontAwesome.h" />
     <ClInclude Include="lib\glad\includes\KHR\khrplatform.h" />
     <ClInclude Include="lib\imgui\imgui.h" />
@@ -173,6 +175,7 @@
   <ItemGroup>
     <None Include="Librairies\resources\shaders\default.frag" />
     <None Include="Librairies\resources\shaders\default.vert" />
+    <None Include="libyaml-cpp.dll" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\gameObjects\Player.cpp" />
@@ -180,7 +183,7 @@
     <ClCompile Include="lib\glad\src\glad.c" />
     <ClCompile Include="lib\imgui\backends\imgui_impl_glfw.cpp" />
     <ClCompile Include="lib\imgui\backends\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="src\gameObjects\Scene.cpp" />
+    <ClCompile Include="src\scene\Scene.cpp" />
     <ClCompile Include="src\graphics\Camera.cpp" />
     <ClCompile Include="lib\imgui\imgui.cpp" />
     <ClCompile Include="lib\imgui\imgui_demo.cpp" />
@@ -199,6 +202,8 @@
     <ClCompile Include="src\graphics\Renderer.cpp" />
     <ClCompile Include="src\graphics\Shader.cpp" />
     <ClCompile Include="src\physics\RigidBody.cpp" />
+    <ClCompile Include="src\scene\SceneSerializer.cpp" />
+    <ClCompile Include="src\ui\EntityTree.cpp" />
     <ClCompile Include="src\ui\UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
