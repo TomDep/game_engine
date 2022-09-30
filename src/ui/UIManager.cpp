@@ -46,6 +46,8 @@ void UIManager::resetSimulation() {
 }
 
 void UIManager::render() {
+	if (!showWindow) return;
+
 	/* ---------- Components ---------- */
 
 	// Start the Dear ImGui frame
@@ -55,12 +57,12 @@ void UIManager::render() {
 
 	// UI INTERFACE
 	if (showWindow) {
-		ImGui::SetNextWindowSize(ImVec2(300, 220), 0);
+		//ImGui::SetNextWindowSize(ImVec2(300, 220), 0);
 
 		// ImGUI window creation
 		ImGui::Begin("Toolbox");
 
-		ImGui::Text("\nPlay with gravity!");
+		ImGui::Text("Play with gravity!");
 		static float sliderGravity = physicsManager->getGravityConstant();
 		ImGui::SliderFloat("###sliderGravity", &sliderGravity, 0.0f, 50.0f);
 
@@ -89,8 +91,11 @@ void UIManager::render() {
 		
 		// Ends the window
 		ImGui::End();
+
+		// Render all UI Components
+		entityTree->render();
 	}
-	
+
 	ImGui::Render();
 }
 

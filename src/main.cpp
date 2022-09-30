@@ -207,10 +207,9 @@ private:
 	}
 
 	void initUI() {
-		uiManager = new UIManager();
+		uiManager = new UIManager(scene);
 		uiManager->init(window);
 		uiManager->setPhysicsManager(physicsManager);
-		uiManager->setScene(scene);
 	}
 
 	void initRenderer() {
