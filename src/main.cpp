@@ -152,8 +152,8 @@ public:
 	PhysicsManager* physicsManager;
 	Scene* scene;
 
-	uint32_t WINDOW_WIDTH = 800;
-	uint32_t WINDOW_HEIGHT = 600;
+	int WINDOW_WIDTH = 1080;
+	int WINDOW_HEIGHT = 720;
 	
 	float deltaTime = 0.0f;	// Time between current frame and last frame
 	float lastFrame = 0.0f; // Time of last frame
@@ -176,7 +176,10 @@ private:
 
 	void initGLFW() {
 		glfwInit();
+
 		window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "OpenGL Game Engine", nullptr, nullptr);
+		glfwMaximizeWindow(window);
+		glfwGetWindowSize(window, &WINDOW_WIDTH, &WINDOW_HEIGHT);
 
 		// Set all the required options for GLFW
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, GL_VERSION_MAJOR);

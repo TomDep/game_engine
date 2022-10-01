@@ -52,5 +52,7 @@ private:
 
 	/* ---------- UI Components ---------- */
 	EntityTree* entityTree;
+	void renderPhysicsUI();
+	void renderPropertiesPanel();
 };
 
