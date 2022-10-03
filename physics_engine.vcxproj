@@ -140,10 +140,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\graphics\lights\DirectionalLight.h" />
-    <ClInclude Include="src\graphics\lights\Light.h" />
+    <ClInclude Include="src\gameObjects\components\Component.h" />
+    <ClInclude Include="src\gameObjects\components\Mesh.h" />
+    <ClInclude Include="src\gameObjects\components\MeshRenderer.h" />
+    <ClInclude Include="src\gameObjects\components\Transform.h" />
+    <ClInclude Include="src\gameObjects\components\lights\DirectionalLightEmitter.h" />
+    <ClInclude Include="src\gameObjects\components\lights\LightEmitter.h" />
     <ClInclude Include="src\graphics\Material.h" />
-    <ClInclude Include="src\graphics\lights\PointLight.h" />
+    <ClInclude Include="src\gameObjects\components\lights\PointLightEmitter.h" />
     <ClInclude Include="src\graphics\Texture.h" />
     <ClInclude Include="src\physics\parea\Vector4.h" />
     <ClInclude Include="src\physics\RigidBody.h" />
@@ -170,6 +174,10 @@
     <ClInclude Include="src\physics\parea\precision.h" />
     <ClInclude Include="src\physics\PhysicsManager.h" />
     <ClInclude Include="src\graphics\Shader.h" />
+    <ClInclude Include="src\ui\Inspector.h" />
+    <ClInclude Include="src\ui\MainMenuBar.h" />
+    <ClInclude Include="src\ui\Panel.h" />
+    <ClInclude Include="src\ui\PhysicsPanel.h" />
     <ClInclude Include="src\ui\UIManager.h" />
     <ClInclude Include="src\graphics\Renderer.h" />
   </ItemGroup>
@@ -179,6 +187,8 @@
     <None Include="libyaml-cpp.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\gameObjects\components\Mesh.cpp" />
+    <ClCompile Include="src\gameObjects\components\MeshRenderer.cpp" />
     <ClCompile Include="src\gameObjects\Player.cpp" />
     <ClCompile Include="src\gameObjects\Entity.cpp" />
     <ClCompile Include="lib\glad\src\glad.c" />
@@ -191,10 +201,10 @@
     <ClCompile Include="lib\imgui\imgui_draw.cpp" />
     <ClCompile Include="lib\imgui\imgui_tables.cpp" />
     <ClCompile Include="lib\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="src\graphics\lights\DirectionalLight.cpp" />
-    <ClCompile Include="src\graphics\lights\Light.cpp" />
+    <ClCompile Include="src\gameObjects\components\lights\DirectionalLightEmitter.cpp" />
+    <ClCompile Include="src\gameObjects\components\lights\LightEmitter.cpp" />
     <ClCompile Include="src\graphics\Material.cpp" />
-    <ClCompile Include="src\graphics\lights\PointLight.cpp" />
+    <ClCompile Include="src\gameObjects\components\lights\PointLightEmitter.cpp" />
     <ClCompile Include="src\graphics\Texture.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\physics\parea\Particle.cpp" />
@@ -205,6 +215,10 @@
     <ClCompile Include="src\physics\RigidBody.cpp" />
     <ClCompile Include="src\scene\SceneSerializer.cpp" />
     <ClCompile Include="src\ui\EntityTree.cpp" />
+    <ClCompile Include="src\ui\Inspector.cpp" />
+    <ClCompile Include="src\ui\MainMenuBar.cpp" />
+    <ClCompile Include="src\ui\Panel.cpp" />
+    <ClCompile Include="src\ui\PhysicsPanel.cpp" />
     <ClCompile Include="src\ui\UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>

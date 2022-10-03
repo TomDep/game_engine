@@ -3,54 +3,61 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "components/Transform.h"
 #include "../physics/RigidBody.h"
+#include "components/lights/DirectionalLightEmitter.h"
+#include "components/lights/PointLightEmitter.h"
+#include "components/Mesh.h"
+#include "components/MeshRenderer.h"
+
 #include <string>
+#include <vector>
 
 class Entity {
 public:
+	Entity();
 	Entity(glm::vec3 p, glm::vec3 s, glm::vec3 r);
 
+	void addChild(Entity* entity) { children.push_back(entity); }
+	std::vector<Entity*> getChildren() const { return children; }
+	bool hasChildren() const { return children.size() > 0; }
+
 	/* ---------- Getters & Setters ---------- */
-	glm::mat4 getModelMatrix() const { return modelMatrix; }
+	int getId() const { return id; }
+	void setId(int _id) { id = _id; }
 
-	glm::vec3 getPosition() const { return position; }
-	void setPosition(glm::vec3 newPosition) {
-		position = newPosition;
-		updateModelMatrix();
+	std::string getName() const { return name; }
+	void setName(std::string newName) { name = newName; }
 
-		if (rigidBody != nullptr) rigidBody->setPosition(position);
-	}
+	void addDirectionalLightEmitter(DirectionalLightEmitter* emitter) { directionalLightEmitter = emitter; }
+	DirectionalLightEmitter* getDirectionalLightEmitter() const { return directionalLightEmitter; }
 
-	glm::vec3 getScale() const { return scale; }
-	void setScale(glm::vec3 newScale) {
-		scale = newScale;
-		updateModelMatrix();
-	}
+	void addPointLightEmitter(PointLightEmitter* emitter) { pointLightEmitter = emitter; }
+	PointLightEmitter* getPointLightEmitter() const { return pointLightEmitter; }
 
-	glm::vec3 getRotation() const { return rotation; }
-	void setRotation(glm::vec3 newRotation) {
-		rotation = newRotation;
-		updateModelMatrix();
-	}
-
-	/* ---------- Components ---------- */
 	void addRigidBody(RigidBody* rb) { rigidBody = rb; }
 	RigidBody* getRigidBody() const { return rigidBody; }
-private:
-	void updateModelMatrix() {
-		modelMatrix = glm::mat4(1.0f);
-		modelMatrix = glm::translate(modelMatrix, position);
-		modelMatrix = glm::scale(modelMatrix, scale);
-		
-		modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
-		modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
-		modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
-	}
 
-	glm::vec3 position, scale, rotation;
-	glm::mat4 modelMatrix;
+	Transform* getTransform() const { return transform; }
+
+	void addMesh(Mesh* m) { mesh = m; }
+	Mesh* getMesh() const { return mesh; }
+
+	void addMeshRenderer(MeshRenderer* mR) { meshRenderer = mR; }
+	MeshRenderer* getMeshRenderer() const { return meshRenderer; }
+private:
+	int id = 0;
+	std::string name = "Entity";
+
+	// Children
+	std::vector<Entity*> children;
 
 	/* Components */
+	Transform* transform = nullptr;
 	RigidBody* rigidBody = nullptr;
+	DirectionalLightEmitter* directionalLightEmitter = nullptr;
+	PointLightEmitter* pointLightEmitter = nullptr;
+	Mesh* mesh = nullptr;
+	MeshRenderer* meshRenderer = nullptr;
 };
 

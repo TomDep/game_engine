@@ -1,12 +1,13 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "../Shader.h"
+#include "../../../graphics/Shader.h"
+#include "../Component.h"
 
-class Light {
+class LightEmitter : public Component {
 public:
-	Light() {};
-	Light(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular);
+	LightEmitter() : ambient(glm::vec3(0.5f)), diffuse(glm::vec3(0.7f)), specular(glm::vec3(0.5f)) {};
+	LightEmitter(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular);
 
 	/* ---------- Getters & Setters ---------- */
 	glm::vec3 getAmbient()  const { return ambient;  }

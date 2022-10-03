@@ -5,12 +5,14 @@
 #include "../scene/Scene.h"
 #include "Material.h"
 
-#include "lights/DirectionalLight.h"
-#include "lights/PointLight.h"
+#include "../gameObjects/components/lights/PointLightEmitter.h"
+#include "../gameObjects/components/lights/DirectionalLightEmitter.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
+#define MAX_POINT_LIGHT 4
 
 class Renderer {
 public:
@@ -37,7 +39,11 @@ public:
 
 private:
 
-    void renderEntities();
+    std::vector<PointLightEmitter*> pointLights;
+    std::vector<glm::vec3> pointLightPositions;
+    DirectionalLightEmitter* directionalLight = nullptr;
+
+    void renderEntity(Entity* entity);
     void renderLights();
 
     float vertices[288] = {
@@ -92,7 +98,6 @@ private:
 
     unsigned int EBO;
     Material* material;
-    Light* light;
 
     Shader* shader;
     Shader* lightShader;

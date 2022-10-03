@@ -2,9 +2,9 @@
 
 #include "Scene.h"
 #include "../gameObjects/Entity.h"
-#include "../graphics/lights/DirectionalLight.h"
-#include "../graphics/lights/PointLight.h"
-#include "../graphics/lights/Light.h"
+#include "../gameObjects/components/lights/DirectionalLightEmitter.h"
+#include "../gameObjects/components/lights/PointLightEmitter.h"
+#include "../gameObjects/components/lights/LightEmitter.h"
 #include "../physics/RigidBody.h"
 
 #include <string>
@@ -21,9 +21,6 @@ public:
 
 	void serializeVector3(YAML::Emitter& out, glm::vec3 vector);
 	void serializeEntity(YAML::Emitter& out, Entity* entity);
-	void serializeLight(YAML::Emitter& out, Light* light);
-	void serializeDirectionalLight(YAML::Emitter& out, DirectionalLight* directionalLight);
-	void serializePointLight(YAML::Emitter& out, PointLight* pointLight);
 
 	void deserialize(const std::string& filepath);
 
@@ -34,9 +31,9 @@ public:
 	RigidBody* deserializeRigidBody(YAML::Node rigidBodyNode);
 	
 	// Lights
-	void deserializeLight(YAML::Node lightNode, Light* light);
-	DirectionalLight* deserializeDirectionalLight(YAML::Node directionalLightNode);
-	PointLight* deserializePointLight(YAML::Node);
+	void deserializeLight(YAML::Node lightNode, LightEmitter* light);
+	DirectionalLightEmitter* deserializeDirectionalLight(YAML::Node directionalLightNode);
+	PointLightEmitter* deserializePointLight(YAML::Node);
 private:
 	Scene* scene;
 };

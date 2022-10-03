@@ -6,6 +6,13 @@
 // Icons from FontAwesome
 #include "IconsFontAwesome.h"	// From... https://github.com/juliettef/IconFontCppHeaders/
 
+UIManager::UIManager(Scene* scene, PhysicsManager* physicsManager) : currentScene(scene), physicsManager(physicsManager) {
+	mainMenuBar = new MainMenuBar();
+	entityTree = new EntityTree(scene);
+	physicsPanel = new PhysicsPanel(physicsManager);
+	inspector = new Inspector();
+};
+
 void UIManager::init(GLFWwindow* window) {
 	// GL 3.0 + GLSL 130
 	const char* glsl_version = "#version 410";
@@ -63,31 +70,7 @@ void UIManager::init(GLFWwindow* window) {
 	ImGui_ImplOpenGL3_Init("#version 330");
 }
 
-void UIManager::startSimulation() {
-	physicsManager->setGravityConstant(newGravity);
-	physicsManager->enable();
-	
-	if (toggleDebug)
-		spdlog::debug("[TOGGLE][DEBUG] Starting with a gravity of {}", newGravity);
-}
-
-void UIManager::resetSimulation() {
-	// Deactivate the physics
-	physicsManager->disable();
-
-	std::vector<Entity*>* entities = currentScene->getEntities();
-
-	// We should not be doing that !
-	// There should be a init state saved in the scene that is loaded when restarting the scene
-	Entity* myCube = entities->at(0);
-	myCube->setPosition(glm::vec3(0.0f, 5.0f, 0.0f));
-
-	if (toggleDebug)
-		spdlog::debug("[TOGGLE][DEBUG] Initializing the position of the entity at {} on y-axis", myCube->getPosition().y);
-}
-
-void UIManager::render() {
-
+void UIManager::preRender() {
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
@@ -108,36 +91,26 @@ void UIManager::render() {
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
 	ImGui::Begin("InvisibleWindow", nullptr, windowFlags);
 	ImGui::PopStyleVar(3);
-	
+
 	ImGuiID dockSpaceId = ImGui::GetID("InvisibleWindowDockSpace");
 	ImGui::DockSpace(dockSpaceId, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_PassthruCentralNode);
+}
 
-	if (ImGui::BeginMainMenuBar())
-	{
-		if (ImGui::BeginMenu("File"))
-		{
-			ImGui::MenuItem("Close", "Alt + F4");
-			ImGui::EndMenu();
-		}
+void UIManager::render() {
+	preRender();
 
-		if (ImGui::BeginMenu("Scene"))
-		{
-			ImGui::MenuItem("Open a scene", "Ctr + O");
-			ImGui::MenuItem("Save the scene", "Ctr + S");
-			ImGui::EndMenu();
-		}
+	mainMenuBar->render();
+	physicsPanel->render();
 
-		if (ImGui::BeginMenu("Options"))
-		{
-			ImGui::EndMenu();
-		}
+	entityTree->render();
+	Entity* selectedEntity = entityTree->getSelectedEntity();
+	inspector->setSelectedEntity(selectedEntity);
+	inspector->render();
 
-		ImGui::EndMainMenuBar();
-	}
+	postRender();
+}
 
-	// Add panels
-	renderPropertiesPanel();
-
+void UIManager::postRender() {
 	ImGui::End();
 
 	// Rendering
@@ -159,58 +132,4 @@ void UIManager::cleanUp() {
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
-}
-
-void UIManager::renderPropertiesPanel() {
-	ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse;
-	ImGui::Begin("Properties", nullptr, windowFlags);
-		ImGui::Text("Properties");
-	ImGui::End();
-}
-
-void UIManager::renderPhysicsUI() {
-	if (!showWindow) return;
-
-	/* ---------- Components ---------- */
-
-	// Start the Dear ImGui frame
-
-	// UI INTERFACE
-	if (showWindow) {
-		//ImGui::SetNextWindowSize(ImVec2(300, 220), 0);
-
-		// ImGUI window creation
-		ImGui::Begin("Toolbox");
-
-		ImGui::Text("Play with gravity!");
-		static float sliderGravity = physicsManager->getGravityConstant();
-		ImGui::SliderFloat("###sliderGravity", &sliderGravity, 0.0f, 50.0f);
-
-		if (sliderGravity != newGravity) {
-			newGravity = sliderGravity;
-			if (toggleDebug)
-				spdlog::debug("[TOGGLE][DEBUG] Changed gravity to {}", newGravity);
-		}
-
-		if (ImGui::Button("Start###buttonStart", ImVec2(100, 25))) {
-			// When I press the button start
-			startSimulation();
-		}
-
-		if (ImGui::Button("Reset###buttonRestart", ImVec2(100, 25))) {
-			// When I press the button restart
-			resetSimulation();
-		}
-
-		if (ImGui::Button("Reset & Start", ImVec2(100, 25))) {
-			resetSimulation();
-			startSimulation();
-		}
-
-		ImGui::Checkbox("Debug", &toggleDebug);
-
-		// Ends the window
-		ImGui::End();
-	}
-
 }

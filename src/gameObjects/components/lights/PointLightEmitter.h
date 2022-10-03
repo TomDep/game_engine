@@ -1,14 +1,11 @@
 #pragma once
 
-#include "Light.h"
+#include "LightEmitter.h"
 
-class PointLight : public Light {
+class PointLightEmitter : public LightEmitter {
 public:
-	PointLight() {};
-	PointLight(glm::vec3 position, float constant, float linear, float quadratic, glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular);
-
-	glm::vec3 getPosition() const { return position; }
-	void setPosition(glm::vec3 p) { position = p; }
+	PointLightEmitter() {};
+	PointLightEmitter(float constant, float linear, float quadratic, glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular);
 
 	float getConstant() const { return constant; }
 	void setConstant(float c) { constant = c; }
@@ -19,6 +16,5 @@ public:
 	float getQuadratic() const {return quadratic; }
 	void setQuadratic(float q) { quadratic = q; }
 private:
-	glm::vec3 position;
 	float constant, linear, quadratic;
 };

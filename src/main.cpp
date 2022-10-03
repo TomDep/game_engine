@@ -1,6 +1,7 @@
 #pragma once
 
 // Basics
+#include <time.h>
 #include <iostream>						// Standard I/O streams
 #include <sstream>
 #include <stdlib.h>						// Conversion, random and dynamic memory management
@@ -27,6 +28,11 @@ using namespace std;
 #include "physics/RigidBody.h"
 #include "scene/Scene.h"
 #include "scene/SceneSerializer.h"
+
+#include "gameObjects/components/Mesh.h"
+#include "gameObjects/components/MeshRenderer.h"
+#include "gameObjects/components/lights/DirectionalLightEmitter.h"
+#include "gameObjects/components/lights/PointLightEmitter.h"
 
 class MainApp {
 public:
@@ -101,8 +107,8 @@ public:
 		MainApp& app = MainApp::getInstance();
 
 		// Shortcuts
-		if (key == GLFW_KEY_P && action == GLFW_PRESS) app.uiManager->startSimulation();
-		if (key == GLFW_KEY_R && action == GLFW_PRESS) app.uiManager->resetSimulation();
+		//if (key == GLFW_KEY_P && action == GLFW_PRESS) app.uiManager->startSimulation();
+		//if (key == GLFW_KEY_R && action == GLFW_PRESS) app.uiManager->resetSimulation();
 
 		if (key == GLFW_KEY_TAB && action == GLFW_PRESS) {
 			Camera* cam = app.renderer->getCamera();
@@ -210,9 +216,8 @@ private:
 	}
 
 	void initUI() {
-		uiManager = new UIManager(scene);
+		uiManager = new UIManager(scene, physicsManager);
 		uiManager->init(window);
-		uiManager->setPhysicsManager(physicsManager);
 	}
 
 	void initRenderer() {
@@ -236,26 +241,42 @@ private:
 		scene = new Scene();
 
 		spdlog::debug("[INITIALIZATION][SCENE] Deserializing the scene");
-		SceneSerializer sceneSerializer(scene);
-		sceneSerializer.deserialize("res/scenes/testScene.yaml");
+		//SceneSerializer sceneSerializer(scene);
+		//sceneSerializer.deserialize("res/scenes/testScene.yaml");
 
-		/*
-		// Adding lights
-		PointLight* light1 = new PointLight(glm::vec3(1.2f, 1.0f, 2.0f), 1.0f, 0.045f, 0.0075f, glm::vec3(0.2f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(1.0f));
-		PointLight* light2 = new PointLight(glm::vec3(-1.2f, 1.0f, 2.0f), 1.0f, 0.045f, 0.0075f, glm::vec3(0.2f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(1.0f));
-		DirectionalLight* sun = new DirectionalLight(glm::vec3(-0.2f, -1.0f, -0.3f), glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.0f));
-		scene->setDirectionalLight(sun);
-		scene->addPointLight(light2);
-		scene->addPointLight(light1);
+		Entity* sun = new Entity();
+		sun->setName("Sun");
+		DirectionalLightEmitter* dirSun = new DirectionalLightEmitter(glm::vec3(-0.2f, -1.0f, -0.3f), glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.0f));
+		sun->addDirectionalLightEmitter(dirSun);
+		scene->addEntity(sun);
 
-		// Adding entities
-		Entity* cube = new Entity(glm::vec3(0.0f, 5.0f, 0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
-		cube->addRigidBody(new RigidBody(cube->getPosition()));
+		Entity* light = new Entity();
+		light->setName("Light");
+		light->getTransform()->setPosition(glm::vec3(2.0, 2.0, -2.0));
+		PointLightEmitter* emitter = new PointLightEmitter(
+			1.0f, 0.09f, 0.032f,
+			glm::vec3(0.5f, 0.0f, 0.0f),
+			glm::vec3(0.8f, 0.0f, 0.5f),
+			glm::vec3(1.0f));
+		light->addPointLightEmitter(emitter);
+		scene->addEntity(light);
 
-		//scene->addEntity(ground);
-		scene->addEntity(cube);
-		*/
+		Entity* cubeA = new Entity(glm::vec3(0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
+		cubeA->addMesh(new Mesh());
+		cubeA->addMeshRenderer(new MeshRenderer());
+		cubeA->setName("Cube");
+		
+		Entity* cubeA_1 = new Entity(glm::vec3(0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
+		Entity* cubeA_1_1 = new Entity(glm::vec3(0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
+		Entity* cubeA_2 = new Entity(glm::vec3(0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
+		Entity* cubeA_3 = new Entity(glm::vec3(0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
 
+		//cubeA_1->addChild(cubeA_1_1);
+		//cubeA->addChild(cubeA_1);
+		//cubeA->addChild(cubeA_2);
+		//cubeA->addChild(cubeA_3);
+
+		scene->addEntity(cubeA);
 		physicsManager->setCurrentScene(scene);
 		renderer->setCurrentScene(scene);
 
@@ -327,6 +348,7 @@ private:
 
 int main()
 {
+	srand(time(NULL));
 	MainApp& app = MainApp::getInstance();
 
 	try {

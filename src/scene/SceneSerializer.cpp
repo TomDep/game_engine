@@ -23,22 +23,6 @@ void SceneSerializer::serialize(const std::string& filepath) {
 		}
 	out << YAML::EndSeq;
 
-	out << YAML::Key << "Lights";
-	out << YAML::Value << YAML::BeginMap;
-		DirectionalLight* directionalLight = scene->getDirectionalLight();
-		if(directionalLight != nullptr) serializeDirectionalLight(out, directionalLight);
-
-		int nbOfPointLights = scene->getNumberOfPointLight();
-		if (nbOfPointLights > 0) {
-			out << YAML::Key << "PointLights";
-			out << YAML::Value << YAML::BeginSeq;
-			for (int i = 0; i < nbOfPointLights; i++) {
-				serializePointLight(out, scene->getPointLights()[i]);
-			}
-			out << YAML::EndSeq;
-		}
-	out << YAML::EndMap;
-
 	out << YAML::EndMap;
 	std::ofstream fout(filepath);
 	fout << out.c_str();
@@ -57,16 +41,16 @@ void SceneSerializer::serializeVector3(YAML::Emitter& out, glm::vec3 vector) {
 
 void SceneSerializer::serializeEntity(YAML::Emitter& out, Entity* entity) {
 	out << YAML::BeginMap;
-		out << YAML::Key << "Entity";
+		out << YAML::Key << "Id";
 		out << YAML::Value << 854318965;
 	
 		// Transform component
 		out << YAML::Key << "Position";
-		serializeVector3(out, entity->getPosition());
+		serializeVector3(out, entity->getTransform()->getPosition());
 		out << YAML::Key << "Scale";
-		serializeVector3(out, entity->getScale());
+		serializeVector3(out, entity->getTransform()->getScale());
 		out << YAML::Key << "Rotation";
-		serializeVector3(out, entity->getRotation());
+		serializeVector3(out, entity->getTransform()->getRotation());
 
 		// RigidBody component
 		RigidBody* rigidBody = entity->getRigidBody();
@@ -76,41 +60,44 @@ void SceneSerializer::serializeEntity(YAML::Emitter& out, Entity* entity) {
 				out << YAML::Key << "Dynamic" << YAML::Value << rigidBody->isDynamic();
 			out << YAML::EndMap;
 		}
+
+		// DirectionalLightEmitter component
+		DirectionalLightEmitter* directionalLightEmitter = entity->getDirectionalLightEmitter();
+		if (directionalLightEmitter != nullptr) {
+			out << YAML::Key << "DirectionalLightEmitter";
+			out << YAML::Value << YAML::BeginMap;
+				out << YAML::Key << "Direction";
+				serializeVector3(out, directionalLightEmitter->getDirection());
+				out << YAML::Key << "Ambient";
+				serializeVector3(out, directionalLightEmitter->getAmbient());
+				out << YAML::Key << "Diffuse";
+				serializeVector3(out, directionalLightEmitter->getDiffuse());
+				out << YAML::Key << "Specular";
+				serializeVector3(out, directionalLightEmitter->getSpecular());
+			out << YAML::EndMap;
+		}
+
+		PointLightEmitter* pointLightEmitter = entity->getPointLightEmitter();
+		if (pointLightEmitter != nullptr) {
+			out << YAML::Key << "PointLightEmitter";
+			out << YAML::Value << YAML::BeginMap;
+				out << YAML::Key << "Ambient";
+				serializeVector3(out, pointLightEmitter->getAmbient());
+				out << YAML::Key << "Diffuse";
+				serializeVector3(out, pointLightEmitter->getDiffuse());
+				out << YAML::Key << "Specular";
+				serializeVector3(out, pointLightEmitter->getSpecular());
+
+				out << YAML::Key << "Constant";
+				out << YAML::Value << pointLightEmitter->getConstant();
+				out << YAML::Key << "Linear";
+				out << YAML::Value << pointLightEmitter->getLinear();
+				out << YAML::Key << "Specular";
+				out << YAML::Value << pointLightEmitter->getQuadratic();
+			out << YAML::EndMap;
+		}
 	
 	out << YAML::EndMap;
-}
-
-void SceneSerializer::serializeDirectionalLight(YAML::Emitter& out, DirectionalLight* directionalLight) {	
-	out << YAML::Key << "DirectionalLight";
-	out << YAML::Value << YAML::BeginMap;
-		out << YAML::Key << "Direction";
-		serializeVector3(out, directionalLight->getDirection());
-		serializeLight(out, directionalLight);
-	out << YAML::EndMap;
-}
-
-void SceneSerializer::serializePointLight(YAML::Emitter& out, PointLight* pointLight) {
-	out << YAML::BeginMap;
-		out << YAML::Key << "PointLight" << YAML::Value << pointLight->getId();
-		out << YAML::Key << "Position";
-		serializeVector3(out, pointLight->getPosition());
-		out << YAML::Key << "Constant";
-		out << YAML::Value << pointLight->getConstant();
-		out << YAML::Key << "Linear";
-		out << YAML::Value << pointLight->getLinear();
-		out << YAML::Key << "Quadratic";
-		out << YAML::Value << pointLight->getQuadratic();
-		serializeLight(out, pointLight);
-	out << YAML::EndMap;
-}
-
-void SceneSerializer::serializeLight(YAML::Emitter& out, Light* light) {
-	out << YAML::Key << "Ambient";
-	serializeVector3(out, light->getAmbient());
-	out << YAML::Key << "Diffuse";
-	serializeVector3(out, light->getDiffuse());
-	out << YAML::Key << "Specular";
-	serializeVector3(out, light->getSpecular());
 }
 
 void SceneSerializer::deserialize(const std::string& filepath) {
@@ -130,37 +117,52 @@ void SceneSerializer::deserialize(const std::string& filepath) {
 			scene->addEntity(deserializeEntity(entity));
 		}
 	}
-
-	auto lights = data["Lights"];
-	auto directionalLightNode = lights["DirectionalLight"];
-	if (directionalLightNode) {
-		scene->setDirectionalLight(deserializeDirectionalLight(directionalLightNode));
-	}
-
-	auto pointLights = lights["PointLights"];
-	if (pointLights) {
-		for (auto pointLight : pointLights) {
-			scene->addPointLight(deserializePointLight(pointLight));
-		}
-	}
 }
 
 Entity* SceneSerializer::deserializeEntity(YAML::detail::iterator_value entityNode) {
-	//int id = entityNode["Id"].as<int>();
+	int id = entityNode["Id"].as<int>();
 	glm::vec3 position = deserializeVector3(entityNode["Position"]);
 	glm::vec3 scale = deserializeVector3(entityNode["Scale"]);
 	glm::vec3 rotation = deserializeVector3(entityNode["Rotation"]);
 
 	// Create the entity
 	Entity* entity = new Entity(position, scale, rotation);
-	//entity->setId(id);
+	entity->setId(id);
 
 	// Components
+
+	// RigidBody
 	auto rigidBodyNode = entityNode["RigidBody"];
 	if (rigidBodyNode) {
 		RigidBody* rigidBody = deserializeRigidBody(rigidBodyNode);
-		rigidBody->setPosition(entity->getPosition());
+		rigidBody->setPosition(entity->getTransform()->getPosition());
 		entity->addRigidBody(rigidBody);
+	}
+
+	// PointLightEmitter
+	auto pointLightEmitterNode = entityNode["PointLightEmitter"];
+	if (pointLightEmitterNode) {
+		glm::vec3 ambient = deserializeVector3(pointLightEmitterNode["Ambient"]);
+		glm::vec3 diffuse = deserializeVector3(pointLightEmitterNode["Diffuse"]);
+		glm::vec3 specular = deserializeVector3(pointLightEmitterNode["Specular"]);
+		float constant = pointLightEmitterNode["Consstant"].as<float>();
+		float linear = pointLightEmitterNode["Linear"].as<float>();
+		float quadratic = pointLightEmitterNode["Quadratic"].as<float>();
+
+		PointLightEmitter* pointLightEmitter = new PointLightEmitter(constant, linear, quadratic, ambient, diffuse, specular);
+		entity->addPointLightEmitter(pointLightEmitter);
+	}
+
+	// DirectionalLightEmitter
+	auto directionalLightEmitterNode = entityNode["DirectionalLightEmitter"];
+	if (directionalLightEmitterNode) {
+		glm::vec3 ambient = deserializeVector3(directionalLightEmitterNode["Ambient"]);
+		glm::vec3 diffuse = deserializeVector3(directionalLightEmitterNode["Diffuse"]);
+		glm::vec3 specular = deserializeVector3(directionalLightEmitterNode["Specular"]);
+		glm::vec3 direction = deserializeVector3(directionalLightEmitterNode["Direction"]);
+
+		DirectionalLightEmitter* directionalLightEmitter = new DirectionalLightEmitter(direction, ambient, diffuse, specular);
+		entity->addDirectionalLightEmitter(directionalLightEmitter);
 	}
 
 	return entity;
@@ -180,42 +182,4 @@ RigidBody* SceneSerializer::deserializeRigidBody(YAML::Node rigidBodyNode) {
 	rigidBody->setDynamic(dynamic);
 
 	return rigidBody;
-}
-
-void SceneSerializer::deserializeLight(YAML::Node lightNode, Light* light) {
-	glm::vec3 ambient = deserializeVector3(lightNode["Ambient"]);
-	glm::vec3 diffuse = deserializeVector3(lightNode["Diffuse"]);
-	glm::vec3 specular = deserializeVector3(lightNode["Specular"]);
-	//int id = lightNode["Id"].as<int>();
-
-	light->setAmbient(ambient);
-	light->setDiffuse(diffuse);
-	light->setSpecular(specular);
-	//light->setId(id);
-}
-
-DirectionalLight* SceneSerializer::deserializeDirectionalLight(YAML::Node directionalLightNode) {
-	glm::vec3 direction = deserializeVector3(directionalLightNode["Direction"]);
-	
-	DirectionalLight* directionalLight = new DirectionalLight();
-	directionalLight->setDirection(direction);
-
-	deserializeLight(directionalLightNode, directionalLight);
-	return directionalLight;
-}
-
-PointLight* SceneSerializer::deserializePointLight(YAML::Node pointLightNode) {
-	glm::vec3 position = deserializeVector3(pointLightNode["Position"]);
-	float constant = pointLightNode["Constant"].as<float>();
-	float linear = pointLightNode["Linear"].as<float>();
-	float quadratic = pointLightNode["Quadratic"].as<float>();
-
-	PointLight* pointLight = new PointLight();
-	pointLight->setPosition(position);
-	pointLight->setConstant(constant);
-	pointLight->setLinear(linear);
-	pointLight->setQuadratic(quadratic);
-
-	deserializeLight(pointLightNode, pointLight);
-	return pointLight;
 }

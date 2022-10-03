@@ -88,8 +88,43 @@ Renderer::Renderer(Camera* camera) : camera(camera) {
 }
 
 void Renderer::render() {
+	std::vector<Entity*> entities = *currentScene->getEntities();
+	for (Entity* entity : entities) {
+		// Check for components
+		if (entity->getPointLightEmitter() != nullptr && pointLights.size() < MAX_POINT_LIGHT) {
+			pointLights.push_back(entity->getPointLightEmitter());
+			pointLightPositions.push_back(entity->getTransform()->getPosition());
+		}
+		
+		if (entity->getDirectionalLightEmitter() != nullptr)
+			directionalLight = entity->getDirectionalLightEmitter();
+
+		if (entity->getMeshRenderer() != nullptr && entity->getMesh() != nullptr) {
+			renderEntity(entity);
+		}
+	}
+
 	renderLights();
-	renderEntities();
+
+	// Reset the lights
+	directionalLight = nullptr;
+	pointLights.clear();
+	pointLightPositions.clear();
+}
+
+void Renderer::renderEntity(Entity * entity) {
+	shader->use();
+	shader->setVector3("viewPos", camera->getPosition());
+	shader->setMatrix4x4("view", camera->getView());
+
+	material->use(shader);
+
+	// For now there is only one mesh for all entities
+	glBindVertexArray(VAO);
+
+	// render entity
+	shader->setMatrix4x4("model", entity->getTransform()->getModelMatrix());
+	glDrawArrays(GL_TRIANGLES, 0, 36);
 }
 
 void Renderer::renderLights() {
@@ -100,7 +135,6 @@ void Renderer::renderLights() {
 	shader->setVector3("viewPos", camera->getPosition());
 
 	// Directional light
-	DirectionalLight* directionalLight = currentScene->getDirectionalLight();
 	if (directionalLight != nullptr) {
 		shader->setVector3("dirLight.direction", directionalLight->getDirection());
 
@@ -115,14 +149,13 @@ void Renderer::renderLights() {
 	// Point lights
 
 	// Number of point lights
-	shader->setInt("nbOfPointLights", currentScene->getNumberOfPointLight());
+	shader->setInt("nbOfPointLights", pointLights.size());
 	
-	PointLight** pointLights = currentScene->getPointLights();
-	for (int i = 0; i < currentScene->getNumberOfPointLight(); i++) {
-		PointLight* light = pointLights[i];
+	for (int i = 0; i < pointLights.size(); i++) {
+		PointLightEmitter* light = pointLights[i];
 
 		shader->use();
-		shader->setVector3("pointLights[" + to_string(i) + "].position", light->getPosition());
+		shader->setVector3("pointLights[" + to_string(i) + "].position", pointLightPositions.at(i));
 
 		shader->setVector3("pointLights[" + to_string(i) + "].ambient", light->getAmbient());
 		shader->setVector3("pointLights[" + to_string(i) + "].diffuse", light->getDiffuse());
@@ -136,32 +169,13 @@ void Renderer::renderLights() {
 		lightShader->use();
 
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, light->getPosition());
+		model = glm::translate(model, pointLightPositions.at(i));
 		model = glm::scale(model, glm::vec3(0.2f));
 
 		lightShader->setMatrix4x4("model", model);
 		lightShader->setMatrix4x4("view", camera->getView());
 		lightShader->setVector3("lightColor", light->getDiffuse());
 		
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-	}
-}
-
-void Renderer::renderEntities() {
-	shader->use();
-	shader->setVector3("viewPos", camera->getPosition());
-	shader->setMatrix4x4("view", camera->getView());
-
-	material->use(shader);
-
-	// For now there is only one mesh for all entities
-	glBindVertexArray(VAO);
-
-	// render entities
-	std::vector<Entity*>* entities = currentScene->getEntities();
-	for (Entity* entity : *entities) {
-		shader->setMatrix4x4("model", entity->getModelMatrix());
-
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 	}
 }
