@@ -26,4 +26,4 @@ You will find 3 important folders : lib, res and src.
 - src contains all the physics engine with systems like UI (User Interface), graphics and finally physics.
 
 ## Credits
-This is a original fork of (this repository)[https://github.com/aksel-vaillant/physics_engine] wich was made by Aksel Vaillant, Clément Le Batard and Juliette Le Meudec.
+This is a original fork of [this repository](https://github.com/aksel-vaillant/physics_engine) wich was made by Aksel Vaillant, Clément Le Batard and Juliette Le Meudec.
